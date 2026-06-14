@@ -1,0 +1,92 @@
+name: Splitit Merchant Plans
+description: >-
+  Splitit offers four merchant pricing tiers for offering credit card
+  installment payments. Pricing is negotiated with Splitit sales and depends
+  on transaction volume, merchant category, and desired APR configuration.
+  All plans provide merchants with full upfront funding (except Premium Lite),
+  white-label branding, and access to the Splitit REST APIs.
+url: https://www.splitit.com/business/pricing-plans/
+plans:
+  - name: Essential
+    description: >-
+      Entry-level installment plan for merchants. Shoppers may pay an APR of
+      up to 35.99% on their installments. Merchant receives full transaction
+      funding at time of purchase. Ideal for merchants wanting to offer
+      installments with no additional subsidy cost beyond standard processing.
+    consumer_apr_max: 35.99
+    consumer_apr_min: 0.00
+    upfront_funding: full
+    max_order_value: 10000
+    max_installments: 12
+    features:
+      - White-label branding
+      - No credit application for shoppers
+      - Monthly and biweekly installments
+      - Partial installments
+      - Integrations with BigCommerce, Magento, Salesforce, Shopify, Wix, WooCommerce, SAP
+      - Custom API integration
+    contact_for_pricing: true
+
+  - name: Flex
+    description: >-
+      Mid-tier installment plan offering variable APR between 0% and 35.99%.
+      Provides a balanced approach giving merchants the ability to offer lower
+      APRs to shoppers while keeping merchant fees lower than the Premium tier.
+      Full transaction funding provided upfront to the merchant.
+    consumer_apr_max: 35.99
+    consumer_apr_min: 0.00
+    upfront_funding: full
+    max_order_value: 10000
+    max_installments: 12
+    features:
+      - Variable APR configuration
+      - White-label branding
+      - No credit application for shoppers
+      - Monthly and biweekly installments
+      - Partial installments
+      - Integrations with BigCommerce, Magento, Salesforce, Shopify, Wix, WooCommerce, SAP
+      - Custom API integration
+    contact_for_pricing: true
+
+  - name: Premium
+    description: >-
+      Recommended tier offering 0% APR installments to shoppers, funded by the
+      merchant. Merchant absorbs the installment subsidy cost in exchange for
+      improved conversion rates and higher average order values. Full upfront
+      funding provided to the merchant. No interest or fees charged to shoppers.
+    consumer_apr_max: 0.00
+    consumer_apr_min: 0.00
+    upfront_funding: full
+    max_order_value: 10000
+    max_installments: 12
+    features:
+      - 0% APR for shoppers
+      - White-label branding
+      - No credit application for shoppers
+      - Monthly and biweekly installments
+      - Partial installments
+      - Integrations with BigCommerce, Magento, Salesforce, Shopify, Wix, WooCommerce, SAP
+      - Custom API integration
+    contact_for_pricing: true
+
+  - name: Premium Lite
+    description: >-
+      0% APR installments for shoppers with partial upfront funding for
+      merchants. Reduces merchant fee costs compared to the full Premium plan
+      by deferring a portion of the merchant payout to align with installment
+      collection. Ideal for merchants wanting 0% consumer APR at lower cost.
+    consumer_apr_max: 0.00
+    consumer_apr_min: 0.00
+    upfront_funding: partial
+    max_order_value: 10000
+    max_installments: 12
+    features:
+      - 0% APR for shoppers
+      - Partial upfront funding (lower merchant fees)
+      - White-label branding
+      - No credit application for shoppers
+      - Monthly and biweekly installments
+      - Partial installments
+      - Integrations with BigCommerce, Magento, Salesforce, Shopify, Wix, WooCommerce, SAP
+      - Custom API integration
+    contact_for_pricing: true

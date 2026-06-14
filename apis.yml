@@ -1,0 +1,225 @@
+name: Splitit
+description: >-
+  Splitit is a credit card installment platform that enables merchants to offer
+  shoppers the ability to split existing credit card purchases into monthly
+  installments without requiring new credit applications, additional interest
+  charges, or third-party redirects. The platform operates directly on shoppers'
+  existing credit cards, leveraging available credit to create installment plans
+  while merchants receive full payment upfront. Splitit provides REST APIs for
+  installment plan creation, eligibility checking, refunds, chargebacks, and
+  merchant onboarding, along with plugins for major e-commerce platforms.
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/splitit/refs/heads/main/apis.yml
+version: '0.19'
+created: '2026-06-13'
+modified: '2026-06-13'
+tags:
+  - Payments
+  - Installments
+  - Buy Now Pay Later
+  - Credit Card
+  - Fintech
+  - E-commerce
+apis:
+  - name: Splitit Installments API v3
+    description: >-
+      The primary REST API for creating and managing credit card installment
+      plans. Enables merchants to check shopper eligibility, create installment
+      plans, verify authorization, fetch and update plans, process refunds, and
+      handle cancellations. All requests use HTTPS with Bearer token
+      authentication obtained via the identity server.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.splitit.com/category/installments-api-v3/
+    baseURL: https://webapi.production.splitit.com
+    tags:
+      - Installments
+      - Payments
+      - Credit Card
+    properties:
+      - type: Documentation
+        url: https://developers.splitit.com/category/installments-api-v3/
+      - type: Quickstart
+        url: https://developers.splitit.com/direct-api/quickstart/
+      - type: Authentication
+        url: https://developers.splitit.com/api/v3/authenticate/
+      - type: OpenAPI
+        url: https://developers.splitit.com/api/v3/introduction/
+    contact:
+      - FN: Splitit Developer Support
+        url: https://developers.splitit.com/
+        email: ''
+    meta:
+      - key: sandbox-url
+        value: https://web-api-v3.sandbox.splitit.com
+      - key: production-url
+        value: https://webapi.production.splitit.com
+      - key: auth-sandbox
+        value: https://id.sandbox.splitit.com/connect/token
+      - key: auth-production
+        value: https://id.production.splitit.com/connect/token
+
+  - name: Splitit Installments API v4
+    description: >-
+      The updated version of the Splitit Installments API offering enhanced
+      capabilities for creating and managing credit card installment plans with
+      improvements over the v3 API.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.splitit.com/apis/
+    baseURL: https://webapi.production.splitit.com
+    tags:
+      - Installments
+      - Payments
+      - Credit Card
+    properties:
+      - type: Documentation
+        url: https://developers.splitit.com/apis/
+    contact:
+      - FN: Splitit Developer Support
+        url: https://developers.splitit.com/
+
+  - name: Splitit Account Management System API
+    description: >-
+      API for onboarding and managing sub-merchants on the Splitit platform.
+      Enables payment facilitators and marketplace operators to add merchant
+      partners, upload compliance documents, send onboarding invitations,
+      monitor approval status, retrieve pending accounts, and generate
+      time-limited secure login links for merchant portal access.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.splitit.com/category/account-management-system-api/
+    baseURL: https://webapi.production.splitit.com
+    tags:
+      - Merchant Management
+      - Onboarding
+      - Account Management
+    properties:
+      - type: Documentation
+        url: https://developers.splitit.com/category/account-management-system-api/
+    contact:
+      - FN: Splitit Developer Support
+        url: https://developers.splitit.com/
+
+  - name: Splitit Merchant Reports API
+    description: >-
+      API for retrieving merchant-level reporting data including transaction
+      history, installment plan summaries, funding reports, and reconciliation
+      data for merchants operating on the Splitit platform.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.splitit.com/apis/
+    baseURL: https://webapi.production.splitit.com
+    tags:
+      - Reporting
+      - Merchant
+      - Analytics
+    properties:
+      - type: Documentation
+        url: https://developers.splitit.com/apis/
+    contact:
+      - FN: Splitit Developer Support
+        url: https://developers.splitit.com/
+
+  - name: Splitit Key Exchange Server API
+    description: >-
+      API for creating and managing encryption keys used to secure payment data
+      during Splitit integrations. Supports cryptographic key management for
+      secure card data handling in compliance with PCI DSS requirements.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.splitit.com/apis/
+    baseURL: https://webapi.production.splitit.com
+    tags:
+      - Security
+      - Encryption
+      - Keys
+      - PCI DSS
+    properties:
+      - type: Documentation
+        url: https://developers.splitit.com/apis/
+    contact:
+      - FN: Splitit Developer Support
+        url: https://developers.splitit.com/
+
+  - name: Splitit Chargebacks API
+    description: >-
+      API for handling and managing chargebacks on Splitit installment plans.
+      Enables merchants to respond to, track, and resolve chargeback disputes
+      for installment transactions processed through the Splitit platform.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.splitit.com/apis/
+    baseURL: https://webapi.production.splitit.com
+    tags:
+      - Chargebacks
+      - Disputes
+      - Payments
+    properties:
+      - type: Documentation
+        url: https://developers.splitit.com/apis/
+    contact:
+      - FN: Splitit Developer Support
+        url: https://developers.splitit.com/
+
+  - name: Splitit Text-to-Pay API
+    description: >-
+      API enabling merchants to initiate Splitit installment payment flows via
+      SMS, email, and QR codes as part of the Splitit Go product. Allows sending
+      payment links to shoppers through non-traditional channels for installment
+      plan creation without a traditional checkout flow.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.splitit.com/apis/
+    baseURL: https://webapi.production.splitit.com
+    tags:
+      - SMS
+      - Text-to-Pay
+      - QR Code
+      - Payments
+    properties:
+      - type: Documentation
+        url: https://developers.splitit.com/apis/
+    contact:
+      - FN: Splitit Developer Support
+        url: https://developers.splitit.com/
+
+common:
+  - type: Portal
+    url: https://developers.splitit.com/
+  - type: Signup
+    url: https://register-developer.sandbox.splitit.com/
+  - type: Documentation
+    url: https://developers.splitit.com/apis/
+  - type: Quickstart
+    url: https://developers.splitit.com/direct-api/quickstart/
+  - type: SDKs
+    url: https://github.com/splitit
+  - type: Python SDK
+    url: https://github.com/Splitit/Python-SDK
+  - type: TypeScript SDK
+    url: https://github.com/Splitit/TypeScript-SDK
+  - type: Go SDK
+    url: https://github.com/Splitit/Go-SDK
+  - type: Java SDK
+    url: https://github.com/Splitit/Java-SDK
+  - type: DotNet SDK
+    url: https://github.com/Splitit/.NET-C-SDK
+  - type: PHP SDK
+    url: https://github.com/Splitit/PHP-SDK
+  - type: Webhooks
+    url: https://developers.splitit.com/category/direct-api-implementations/
+  - type: Plugins
+    url: https://developers.splitit.com/
+  - type: Pricing
+    url: https://www.splitit.com/business/pricing-plans/
+  - type: Trust
+    url: https://trust.splitit.com
+  - type: Contact
+    url: https://www.splitit.com/contact-sales/
+  - type: Merchant Portal
+    url: https://merchant.splitit.com
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/splitit/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: https://raw.githubusercontent.com/api-evangelist/splitit/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: https://raw.githubusercontent.com/api-evangelist/splitit/refs/heads/main/finops/finops.yml
+
+maintainers:
+  - FN: API Evangelist
+    url: https://apievangelist.com
+    email: info@apievangelist.com

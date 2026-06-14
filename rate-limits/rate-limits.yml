@@ -1,0 +1,41 @@
+name: Splitit API Rate Limits
+description: >-
+  Splitit does not publish specific numeric rate limits in its public developer
+  documentation. Rate limiting policies are enforced at the API gateway level
+  and may vary by merchant tier and contract. The authentication token endpoint
+  uses OAuth 2.0 client credentials flow; tokens should be cached and reused
+  rather than requested on each call. Webhook retry behavior is defined: Splitit
+  retries webhook delivery every hour for 24 hours until an HTTP 200 response
+  is received. Merchants requiring higher throughput or explicit rate limit
+  guarantees should contact Splitit sales.
+url: https://developers.splitit.com/direct-api/quickstart/
+limits:
+  - scope: API Requests
+    limit: not_published
+    notes: >-
+      Splitit does not publicly document specific request-per-second or
+      request-per-minute limits. Contact Splitit sales for contractual
+      rate limit details applicable to your merchant tier.
+
+  - scope: Authentication Token
+    limit: not_published
+    notes: >-
+      OAuth 2.0 client_credentials tokens should be cached and reused.
+      Requesting a new token on every API call is discouraged. Token
+      lifetime is not documented publicly.
+
+  - scope: Webhook Retries
+    limit: 24 retries over 24 hours
+    notes: >-
+      Splitit retries failed webhook deliveries once per hour for up to 24
+      hours. A successful HTTP 200 response from the merchant endpoint stops
+      retries. Merchants should ensure webhook endpoints are idempotent.
+
+  - scope: Sandbox Environment
+    limit: sandbox_only
+    notes: >-
+      A dedicated sandbox environment is available at
+      https://web-api-v3.sandbox.splitit.com for development and testing.
+      Sandbox accounts are available via self-registration at
+      https://register-developer.sandbox.splitit.com/. Production access
+      requires merchant approval from Splitit.
