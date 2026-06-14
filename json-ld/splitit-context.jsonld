@@ -1,0 +1,153 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "splitit": "https://developers.splitit.com/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "InstallmentPlan": "splitit:InstallmentPlan",
+    "installmentPlanNumber": {
+      "@id": "splitit:installmentPlanNumber",
+      "@type": "xsd:string"
+    },
+    "numberOfInstallments": {
+      "@id": "splitit:numberOfInstallments",
+      "@type": "xsd:integer"
+    },
+    "refOrderNumber": {
+      "@id": "splitit:refOrderNumber",
+      "@type": "xsd:string"
+    },
+    "planStatus": {
+      "@id": "splitit:planStatus",
+      "@type": "xsd:string"
+    },
+    "checkoutUrl": {
+      "@id": "splitit:checkoutUrl",
+      "@type": "@id"
+    },
+    "extendedParams": "splitit:extendedParams",
+
+    "Money": "splitit:Money",
+    "totalAmount": "splitit:totalAmount",
+    "installmentAmount": "splitit:installmentAmount",
+    "refundedAmount": "splitit:refundedAmount",
+    "value": {
+      "@id": "splitit:monetaryValue",
+      "@type": "xsd:decimal"
+    },
+    "currency": {
+      "@id": "splitit:currency",
+      "@type": "xsd:string"
+    },
+
+    "CreditCardDetails": "splitit:CreditCardDetails",
+    "cardNumber": "splitit:cardNumber",
+    "cardExpYear": {
+      "@id": "splitit:cardExpYear",
+      "@type": "xsd:integer"
+    },
+    "cardExpMonth": {
+      "@id": "splitit:cardExpMonth",
+      "@type": "xsd:integer"
+    },
+    "cardCvv": "splitit:cardCvv",
+    "cardHolderFullName": "name",
+
+    "ConsumerData": "splitit:ConsumerData",
+    "fullName": "name",
+    "email": "email",
+    "phoneNumber": "telephone",
+    "civilId": "splitit:civilId",
+    "billingAddress": "address",
+
+    "Address": "PostalAddress",
+    "addressLine1": "streetAddress",
+    "addressLine2": "splitit:addressLine2",
+    "city": "addressLocality",
+    "state": "addressRegion",
+    "country": "addressCountry",
+    "zip": "postalCode",
+
+    "Installment": "splitit:Installment",
+    "installmentNumber": {
+      "@id": "splitit:installmentNumber",
+      "@type": "xsd:integer"
+    },
+    "processDateTime": {
+      "@id": "splitit:processDateTime",
+      "@type": "xsd:dateTime"
+    },
+    "installmentStatus": {
+      "@id": "splitit:installmentStatus",
+      "@type": "xsd:string"
+    },
+
+    "RedirectUrls": "splitit:RedirectUrls",
+    "succeeded": {
+      "@id": "splitit:succeededUrl",
+      "@type": "@id"
+    },
+    "failed": {
+      "@id": "splitit:failedUrl",
+      "@type": "@id"
+    },
+    "cancelled": {
+      "@id": "splitit:cancelledUrl",
+      "@type": "@id"
+    },
+
+    "MerchantPartner": "splitit:MerchantPartner",
+    "merchantId": "splitit:merchantId",
+    "businessName": "legalName",
+    "businessType": "splitit:businessType",
+    "website": "url",
+    "taxId": "taxID",
+    "onboardingStatus": {
+      "@id": "splitit:onboardingStatus",
+      "@type": "xsd:string"
+    },
+
+    "Refund": "splitit:Refund",
+    "refundId": "splitit:refundId",
+    "refundStrategy": {
+      "@id": "splitit:refundStrategy",
+      "@type": "xsd:string"
+    },
+
+    "createdAt": {
+      "@id": "dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "expiresAt": {
+      "@id": "splitit:expiresAt",
+      "@type": "xsd:dateTime"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "https://developers.splitit.com/",
+      "@type": "WebAPI",
+      "name": "Splitit API",
+      "description": "Credit card installment platform enabling merchants to offer shoppers the ability to split purchases into monthly installments using existing credit cards",
+      "documentation": "https://developers.splitit.com/apis/",
+      "provider": {
+        "@type": "Organization",
+        "name": "Splitit",
+        "url": "https://www.splitit.com",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "developer support",
+          "url": "https://developers.splitit.com/"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.splitit.com/business/pricing-plans/"
+      }
+    }
+  ]
+}

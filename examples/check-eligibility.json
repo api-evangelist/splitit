@@ -1,0 +1,61 @@
+{
+  "title": "Check Eligibility - Example Request and Response",
+  "description": "Example of checking a shopper's eligibility for Splitit installment plans",
+  "api": "Splitit Installments API v3",
+  "endpoint": "POST /check-eligibility",
+  "environment": "sandbox",
+  "request": {
+    "url": "https://web-api-v3.sandbox.splitit.com/check-eligibility",
+    "method": "POST",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "planData": {
+        "totalAmount": {
+          "value": 500.00,
+          "currency": "USD"
+        },
+        "numberOfInstallments": 6
+      },
+      "billingAddress": {
+        "country": "US",
+        "zip": "90210"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "isEligible": true,
+      "eligiblePlans": [
+        {
+          "numberOfInstallments": 3,
+          "installmentAmount": {
+            "value": 166.67,
+            "currency": "USD"
+          }
+        },
+        {
+          "numberOfInstallments": 6,
+          "installmentAmount": {
+            "value": 83.33,
+            "currency": "USD"
+          }
+        },
+        {
+          "numberOfInstallments": 12,
+          "installmentAmount": {
+            "value": 41.67,
+            "currency": "USD"
+          }
+        }
+      ],
+      "errors": []
+    }
+  }
+}

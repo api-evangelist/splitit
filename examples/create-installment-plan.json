@@ -1,0 +1,106 @@
+{
+  "title": "Create Installment Plan - Example Request and Response",
+  "description": "Example of creating a Splitit installment plan via the v3 API",
+  "api": "Splitit Installments API v3",
+  "endpoint": "POST /installmentplans",
+  "environment": "sandbox",
+  "request": {
+    "url": "https://web-api-v3.sandbox.splitit.com/installmentplans",
+    "method": "POST",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "planData": {
+        "totalAmount": {
+          "value": 300.00,
+          "currency": "USD"
+        },
+        "numberOfInstallments": 3,
+        "refOrderNumber": "ORD-2026-00123",
+        "extendedParams": {
+          "productCategory": "electronics",
+          "merchantCustomField1": "value1"
+        }
+      },
+      "creditCardDetails": {
+        "cardNumber": "4111111111111111",
+        "cardExpYear": 2027,
+        "cardExpMonth": 12,
+        "cardCvv": "737",
+        "cardHolderFullName": "Jane Smith"
+      },
+      "billingAddress": {
+        "addressLine1": "123 Main Street",
+        "addressLine2": "Apt 4B",
+        "city": "New York",
+        "state": "NY",
+        "country": "US",
+        "zip": "10001"
+      },
+      "consumerData": {
+        "fullName": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "phoneNumber": "+12125551234"
+      },
+      "redirectUrls": {
+        "succeeded": "https://merchant.example.com/order/success",
+        "failed": "https://merchant.example.com/order/failed",
+        "cancelled": "https://merchant.example.com/order/cancelled"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "installmentPlanNumber": "IP-2026-ABCDEF123456",
+      "status": "Active",
+      "planData": {
+        "totalAmount": {
+          "value": 300.00,
+          "currency": "USD"
+        },
+        "numberOfInstallments": 3,
+        "refOrderNumber": "ORD-2026-00123"
+      },
+      "consumerData": {
+        "fullName": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "phoneNumber": "+12125551234"
+      },
+      "installments": [
+        {
+          "installmentNumber": 1,
+          "amount": {
+            "value": 100.00,
+            "currency": "USD"
+          },
+          "processDateTime": "2026-06-13T00:00:00Z",
+          "status": "Pending"
+        },
+        {
+          "installmentNumber": 2,
+          "amount": {
+            "value": 100.00,
+            "currency": "USD"
+          },
+          "processDateTime": "2026-07-13T00:00:00Z",
+          "status": "Pending"
+        },
+        {
+          "installmentNumber": 3,
+          "amount": {
+            "value": 100.00,
+            "currency": "USD"
+          },
+          "processDateTime": "2026-08-13T00:00:00Z",
+          "status": "Pending"
+        }
+      ]
+    }
+  }
+}

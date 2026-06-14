@@ -1,0 +1,37 @@
+{
+  "title": "Refund an Installment Plan - Example Request and Response",
+  "description": "Example of processing a partial refund on a Splitit installment plan",
+  "api": "Splitit Installments API v3",
+  "endpoint": "POST /installmentplans/{installmentPlanNumber}/refund",
+  "environment": "sandbox",
+  "request": {
+    "url": "https://web-api-v3.sandbox.splitit.com/installmentplans/IP-2026-ABCDEF123456/refund",
+    "method": "POST",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "amount": {
+        "value": 100.00,
+        "currency": "USD"
+      },
+      "refundStrategy": "FutureInstallmentsFirst"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "refundId": "REF-2026-789XYZ",
+      "installmentPlanNumber": "IP-2026-ABCDEF123456",
+      "refundedAmount": {
+        "value": 100.00,
+        "currency": "USD"
+      },
+      "status": "Succeeded"
+    }
+  }
+}

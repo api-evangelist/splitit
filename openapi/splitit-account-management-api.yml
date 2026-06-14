@@ -1,0 +1,522 @@
+openapi: 3.0.3
+info:
+  title: Splitit Account Management System API
+  description: >-
+    API for onboarding and managing sub-merchants on the Splitit platform.
+    Enables payment facilitators and marketplace operators to add merchant
+    partners, upload compliance documents, send onboarding invitations,
+    monitor approval status, retrieve pending accounts, and generate
+    time-limited secure login links for merchant portal access.
+  version: '1.0'
+  contact:
+    name: Splitit Developer Support
+    url: https://developers.splitit.com/
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://webapi.production.splitit.com
+    description: Production
+  - url: https://web-api-v3.sandbox.splitit.com
+    description: Sandbox
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Authentication
+    description: Obtain access tokens
+  - name: Merchant Management
+    description: Onboard and manage merchant partners
+
+paths:
+  /token:
+    post:
+      tags:
+        - Authentication
+      operationId: getToken
+      summary: Get Splitit Token
+      description: >-
+        Authenticate using your client_id and client_secret to obtain a Bearer
+        access token for use in all subsequent API calls.
+      security: []
+      servers:
+        - url: https://id.production.splitit.com/connect
+          description: Production Identity Server
+        - url: https://id.sandbox.splitit.com/connect
+          description: Sandbox Identity Server
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - grant_type
+                - client_id
+                - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                    - client_credentials
+                client_id:
+                  type: string
+                  description: API Username from Merchant Hub
+                client_secret:
+                  type: string
+                  description: Active API password from Merchant Hub
+                scope:
+                  type: string
+                  example: api.v1 api.v3
+      responses:
+        '200':
+          description: Access token issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Invalid credentials
+
+  /api/ams/structure:
+    get:
+      tags:
+        - Merchant Management
+      operationId: getMerchantPartnerStructure
+      summary: Structure for Add Merchant Partner Requests
+      description: >-
+        Retrieve the required fields and structure for creating merchant partner
+        requests. Use this endpoint to understand required and optional fields
+        before calling Add Merchant Partner.
+      responses:
+        '200':
+          description: Merchant partner request structure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantStructureResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /api/ams/merchants:
+    post:
+      tags:
+        - Merchant Management
+      operationId: addMerchantPartner
+      summary: Add Merchant Partner
+      description: >-
+        Onboard a new sub-merchant partner to the Splitit platform. Provides
+        required business and compliance information for the new merchant.
+        Payment facilitators and marketplace operators use this endpoint to
+        expand their merchant network on Splitit.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddMerchantPartnerRequest'
+      responses:
+        '200':
+          description: Merchant partner added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantPartnerResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/ams/merchants/{merchantId}/documents:
+    post:
+      tags:
+        - Merchant Management
+      operationId: uploadDocuments
+      summary: Upload Documents
+      description: >-
+        Submit agreements and compliance documentation for a merchant partner.
+        Supports uploading required KYC/KYB documents and agreements needed
+        for Splitit onboarding approval.
+      parameters:
+        - name: merchantId
+          in: path
+          required: true
+          description: The merchant partner identifier
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                documentType:
+                  type: string
+                  description: Type of document being uploaded
+                  example: agreement
+                file:
+                  type: string
+                  format: binary
+                  description: The document file to upload
+      responses:
+        '200':
+          description: Document uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentUploadResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /api/ams/merchants/{merchantId}/invite:
+    post:
+      tags:
+        - Merchant Management
+      operationId: sendInviteEmail
+      summary: Send Invite Emails
+      description: >-
+        Distribute prefilled onboarding forms to merchant partners via email.
+        The invite email contains a link to a prefilled application form
+        that the merchant can complete to finalize their Splitit onboarding.
+      parameters:
+        - name: merchantId
+          in: path
+          required: true
+          description: The merchant partner identifier
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: Email address to send the invite to (defaults to merchant email)
+      responses:
+        '200':
+          description: Invite email sent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InviteEmailResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/ams/merchants/{merchantId}/status:
+    get:
+      tags:
+        - Merchant Management
+      operationId: getOnboardingStatus
+      summary: Get Onboarding Status
+      description: >-
+        Check the approval progress of a merchant partner account. Returns
+        the current onboarding status including any pending items or
+        required actions.
+      parameters:
+        - name: merchantId
+          in: path
+          required: true
+          description: The merchant partner identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Merchant onboarding status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingStatusResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/ams/merchants/pending:
+    get:
+      tags:
+        - Merchant Management
+      operationId: getPendingAccounts
+      summary: Get Pending Accounts
+      description: >-
+        Retrieve all merchant accounts that are still pending Splitit approval.
+        Use this endpoint to monitor the onboarding pipeline and follow up
+        with merchants who have not yet completed the process.
+      responses:
+        '200':
+          description: List of pending merchant accounts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingAccountsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /api/ams/merchants/{merchantId}/login-link:
+    post:
+      tags:
+        - Merchant Management
+      operationId: generateDirectLoginLink
+      summary: Generate Direct Login Link
+      description: >-
+        Create a secure, time-limited portal access link for a merchant partner
+        without requiring credentials. The generated link provides direct access
+        to the Splitit Merchant Hub for the specified merchant.
+      parameters:
+        - name: merchantId
+          in: path
+          required: true
+          description: The merchant partner identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Login link generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginLinkResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  responses:
+    Unauthorized:
+      description: Unauthorized - token is not authorized or is expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden - no right to access this resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found - resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable Entity - validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+
+    Address:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+          example: US
+        zip:
+          type: string
+
+    AddMerchantPartnerRequest:
+      type: object
+      required:
+        - businessName
+        - email
+      properties:
+        businessName:
+          type: string
+          description: Legal business name of the merchant
+        businessType:
+          type: string
+          description: Type of business entity
+        email:
+          type: string
+          format: email
+          description: Primary contact email for the merchant
+        phone:
+          type: string
+          description: Business phone number
+        businessAddress:
+          $ref: '#/components/schemas/Address'
+        website:
+          type: string
+          format: uri
+          description: Merchant website URL
+        taxId:
+          type: string
+          description: Tax identification number
+        contactName:
+          type: string
+          description: Name of the primary contact person
+
+    MerchantPartnerResponse:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          description: Unique identifier assigned to the new merchant
+        status:
+          type: string
+          description: Initial onboarding status
+        businessName:
+          type: string
+        email:
+          type: string
+          format: email
+        createdAt:
+          type: string
+          format: date-time
+
+    MerchantStructureResponse:
+      type: object
+      properties:
+        requiredFields:
+          type: array
+          items:
+            type: object
+            properties:
+              fieldName:
+                type: string
+              fieldType:
+                type: string
+              isRequired:
+                type: boolean
+              description:
+                type: string
+
+    DocumentUploadResponse:
+      type: object
+      properties:
+        documentId:
+          type: string
+          description: Unique identifier for the uploaded document
+        documentType:
+          type: string
+        uploadedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+
+    InviteEmailResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        email:
+          type: string
+          format: email
+        sentAt:
+          type: string
+          format: date-time
+
+    OnboardingStatusResponse:
+      type: object
+      properties:
+        merchantId:
+          type: string
+        status:
+          type: string
+          enum:
+            - Pending
+            - UnderReview
+            - Approved
+            - Rejected
+            - RequiresInfo
+        pendingItems:
+          type: array
+          items:
+            type: string
+          description: List of items required to complete onboarding
+        updatedAt:
+          type: string
+          format: date-time
+
+    PendingAccountsResponse:
+      type: object
+      properties:
+        merchants:
+          type: array
+          items:
+            $ref: '#/components/schemas/MerchantPartnerResponse'
+        totalCount:
+          type: integer
+
+    LoginLinkResponse:
+      type: object
+      properties:
+        loginUrl:
+          type: string
+          format: uri
+          description: Time-limited secure login URL for the merchant portal
+        expiresAt:
+          type: string
+          format: date-time
+          description: Expiration time of the login link

@@ -1,0 +1,180 @@
+title: Splitit API Vocabulary
+description: Key terms and concepts used across the Splitit installment payment platform APIs
+version: '1.0'
+updated: '2026-06-13'
+source: https://developers.splitit.com/
+
+terms:
+  - term: Installment Plan
+    definition: >-
+      An agreement that splits a single credit card purchase into multiple
+      equal monthly charges on the shopper's existing credit card without
+      additional interest or credit applications.
+    aliases:
+      - plan
+      - installment plan number
+
+  - term: InstallmentPlanNumber
+    definition: >-
+      The unique identifier assigned by Splitit to each installment plan.
+      Used to reference the plan in subsequent API calls for fetching,
+      updating, refunding, or verifying authorization.
+    type: string
+    example: IP-2026-ABCDEF123456
+
+  - term: Bearer Token
+    definition: >-
+      Time-limited access token obtained from the Splitit Identity Server
+      by authenticating with client credentials. Must be included in the
+      Authorization header of all API calls as "Bearer <token>".
+    aliases:
+      - access_token
+
+  - term: SAQ-A
+    definition: >-
+      The simplest PCI DSS Self-Assessment Questionnaire level, applicable
+      when merchants use Splitit's pre-built hosted UI (Payment Form or
+      Flex Form) and never handle card data directly. Required for the
+      Initiate Installment Plan endpoint.
+    related:
+      - SAQ-D
+      - PCI DSS
+
+  - term: SAQ-D
+    definition: >-
+      The most comprehensive PCI DSS Self-Assessment Questionnaire level,
+      required when merchants handle raw credit card data directly via
+      server-to-server API calls. Required for the Create Installment Plan
+      endpoint.
+    related:
+      - SAQ-A
+      - PCI DSS
+
+  - term: RefOrderNumber
+    definition: >-
+      A merchant-assigned reference number linking the Splitit installment
+      plan to the merchant's internal order system. Used as an alternate
+      key for looking up and updating plans when the installment plan number
+      is not available.
+    type: string
+
+  - term: ExtendedParams
+    definition: >-
+      A flexible key-value map of merchant-defined parameters that can be
+      attached to an installment plan for custom data storage and retrieval.
+      Supports searching and filtering plans by these custom values.
+    type: object
+
+  - term: Eligibility Check
+    definition: >-
+      A pre-creation verification step that confirms a shopper's credit card
+      is supported and eligible for Splitit installment plans, and determines
+      which installment options are available for the purchase amount.
+
+  - term: Initiate
+    definition: >-
+      The first step in the SAQ-A (hosted checkout) flow. Creates a pending
+      installment plan without card data and returns a checkout URL where
+      the shopper enters their card details in Splitit's hosted UI.
+    related:
+      - Verify Authorization
+
+  - term: Verify Authorization
+    definition: >-
+      A GET call that confirms an initiated installment plan has been
+      properly authorized by the shopper after they complete the hosted
+      checkout flow or 3DS redirection. Must be called before fulfilling
+      the merchant order.
+    related:
+      - Initiate
+
+  - term: Payment Facilitator (PayFac)
+    definition: >-
+      A type of merchant that uses the Splitit Account Management System API
+      to onboard and manage sub-merchants, enabling them to offer Splitit
+      installment plans to their own merchant customers.
+    aliases:
+      - PayFac
+
+  - term: Sub-merchant
+    definition: >-
+      A merchant onboarded and managed by a payment facilitator through
+      the Splitit Account Management System API. The sub-merchant's
+      customers can use Splitit installments at checkout.
+    related:
+      - Payment Facilitator
+
+  - term: Merchant Hub
+    definition: >-
+      Splitit's merchant-facing administration portal at merchant.splitit.com
+      where merchants manage their Splitit integration, view reports, and
+      retrieve API credentials.
+    url: https://merchant.splitit.com
+
+  - term: Terminal ID
+    definition: >-
+      A unique identifier for a specific Splitit terminal (integration point)
+      obtained from the Merchant Hub. Used to identify which configured
+      terminal processes a payment.
+
+  - term: Refund Strategy
+    definition: >-
+      The algorithm used to determine how a partial refund is applied across
+      remaining installments. Options include applying to future installments
+      first (reducing upcoming charges), or applying to past paid installments
+      first.
+    values:
+      - FutureInstallmentsFirst
+      - FutureInstallmentsLast
+      - FutureInstallmentsLast_PaidFirstInstallmentsFirst
+
+  - term: Splitit Go
+    definition: >-
+      A Splitit product enabling merchants to initiate installment payment
+      flows via SMS, email, QR codes, and links without a traditional
+      checkout flow. Supported by the Text-to-Pay API.
+    related:
+      - Text-to-Pay API
+
+  - term: Payment Form
+    definition: >-
+      A pre-built Splitit-hosted checkout UI that handles card data entry
+      directly on Splitit's servers. Enables merchants to use SAQ-A
+      compliance level.
+    related:
+      - Flex Form
+      - SAQ-A
+
+  - term: Flex Form
+    definition: >-
+      A customizable Splitit-hosted UI component that can be embedded in
+      merchant checkout pages while still keeping card data on Splitit's
+      servers for SAQ-A compliance.
+    related:
+      - Payment Form
+      - SAQ-A
+
+  - term: 3DS
+    definition: >-
+      3D Secure authentication protocol for card-not-present transactions.
+      When triggered, the shopper is redirected for additional verification.
+      After 3DS completes, merchants must call Verify Authorization to
+      confirm the plan status.
+    aliases:
+      - 3D Secure
+
+  - term: Chargeback
+    definition: >-
+      A disputed installment transaction where a shopper's bank reverses
+      a charge. Handled via the Splitit Chargebacks API which enables
+      merchants to respond to, track, and resolve chargeback disputes.
+    related:
+      - Chargebacks API
+
+  - term: KYB
+    definition: >-
+      Know Your Business - compliance verification process that Splitit
+      requires for merchant partners onboarded via the Account Management
+      System API. Involves document upload and approval workflow.
+    aliases:
+      - Know Your Business

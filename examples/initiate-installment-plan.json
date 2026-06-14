@@ -1,0 +1,46 @@
+{
+  "title": "Initiate Installment Plan - Example Request and Response",
+  "description": "Example of initiating a Splitit installment plan (SAQ-A flow) for use with Splitit checkout UI",
+  "api": "Splitit Installments API v3",
+  "endpoint": "POST /installmentplans/initiate",
+  "environment": "sandbox",
+  "request": {
+    "url": "https://web-api-v3.sandbox.splitit.com/installmentplans/initiate",
+    "method": "POST",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "planData": {
+        "totalAmount": {
+          "value": 600.00,
+          "currency": "USD"
+        },
+        "numberOfInstallments": 6,
+        "refOrderNumber": "ORD-2026-00456"
+      },
+      "consumerData": {
+        "fullName": "John Doe",
+        "email": "john.doe@example.com",
+        "phoneNumber": "+13105559876"
+      },
+      "redirectUrls": {
+        "succeeded": "https://merchant.example.com/checkout/success?order=ORD-2026-00456",
+        "failed": "https://merchant.example.com/checkout/failed",
+        "cancelled": "https://merchant.example.com/checkout/cancel"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "installmentPlanNumber": "IP-2026-XYZ789012",
+      "checkoutUrl": "https://checkout.splitit.com/v3/IP-2026-XYZ789012",
+      "status": "Initialized"
+    }
+  }
+}
