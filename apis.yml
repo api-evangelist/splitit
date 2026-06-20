@@ -8,7 +8,7 @@ description: >-
   while merchants receive full payment upfront. Splitit provides REST APIs for
   installment plan creation, eligibility checking, refunds, chargebacks, and
   merchant onboarding, along with plugins for major e-commerce platforms.
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/splitit/refs/heads/main/apis.yml
 version: '0.19'
 created: '2026-06-13'
@@ -28,7 +28,7 @@ apis:
       plans, verify authorization, fetch and update plans, process refunds, and
       handle cancellations. All requests use HTTPS with Bearer token
       authentication obtained via the identity server.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.splitit.com/category/installments-api-v3/
     baseURL: https://webapi.production.splitit.com
     tags:
@@ -63,7 +63,7 @@ apis:
       The updated version of the Splitit Installments API offering enhanced
       capabilities for creating and managing credit card installment plans with
       improvements over the v3 API.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.splitit.com/apis/
     baseURL: https://webapi.production.splitit.com
     tags:
@@ -84,7 +84,7 @@ apis:
       partners, upload compliance documents, send onboarding invitations,
       monitor approval status, retrieve pending accounts, and generate
       time-limited secure login links for merchant portal access.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.splitit.com/category/account-management-system-api/
     baseURL: https://webapi.production.splitit.com
     tags:
@@ -103,7 +103,7 @@ apis:
       API for retrieving merchant-level reporting data including transaction
       history, installment plan summaries, funding reports, and reconciliation
       data for merchants operating on the Splitit platform.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.splitit.com/apis/
     baseURL: https://webapi.production.splitit.com
     tags:
@@ -122,7 +122,7 @@ apis:
       API for creating and managing encryption keys used to secure payment data
       during Splitit integrations. Supports cryptographic key management for
       secure card data handling in compliance with PCI DSS requirements.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.splitit.com/apis/
     baseURL: https://webapi.production.splitit.com
     tags:
@@ -142,7 +142,7 @@ apis:
       API for handling and managing chargebacks on Splitit installment plans.
       Enables merchants to respond to, track, and resolve chargeback disputes
       for installment transactions processed through the Splitit platform.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.splitit.com/apis/
     baseURL: https://webapi.production.splitit.com
     tags:
@@ -162,7 +162,7 @@ apis:
       SMS, email, and QR codes as part of the Splitit Go product. Allows sending
       payment links to shoppers through non-traditional channels for installment
       plan creation without a traditional checkout flow.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.splitit.com/apis/
     baseURL: https://webapi.production.splitit.com
     tags:
