@@ -38,7 +38,7 @@ apis:
     properties:
       - type: Documentation
         url: https://developers.splitit.com/category/installments-api-v3/
-      - type: Quickstart
+      - type: GettingStarted
         url: https://developers.splitit.com/direct-api/quickstart/
       - type: Authentication
         url: https://developers.splitit.com/api/v3/authenticate/
@@ -184,7 +184,7 @@ common:
     url: https://register-developer.sandbox.splitit.com/
   - type: Documentation
     url: https://developers.splitit.com/apis/
-  - type: Quickstart
+  - type: GettingStarted
     url: https://developers.splitit.com/direct-api/quickstart/
   - type: SDKs
     url: https://github.com/splitit
