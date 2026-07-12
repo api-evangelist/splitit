@@ -178,6 +178,10 @@ apis:
         url: https://developers.splitit.com/
 
 common:
+  - type: DomainSecurity
+    url: security/splitit-domain-security.yml
+  - type: Authentication
+    url: authentication/splitit-authentication.yml
   - type: Portal
     url: https://developers.splitit.com/
   - type: Signup

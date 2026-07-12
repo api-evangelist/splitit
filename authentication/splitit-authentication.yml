@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/splitit-account-management-api.yml, openapi/splitit-installments-api-v3.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/splitit-account-management-api.yml
+  - openapi/splitit-installments-api-v3.yml
