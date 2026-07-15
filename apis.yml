@@ -178,6 +178,8 @@ apis:
         url: https://developers.splitit.com/
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/splitit-agentic-access.yml
   - type: DomainSecurity
     url: security/splitit-domain-security.yml
   - type: Authentication
