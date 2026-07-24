@@ -1,0 +1,185 @@
+openapi: 3.0.3
+info:
+  title: Splitit Account Management System Authentication Eligibility API
+  description: API for onboarding and managing sub-merchants on the Splitit platform. Enables payment facilitators and marketplace operators to add merchant partners, upload compliance documents, send onboarding invitations, monitor approval status, retrieve pending accounts, and generate time-limited secure login links for merchant portal access.
+  version: '1.0'
+  contact:
+    name: Splitit Developer Support
+    url: https://developers.splitit.com/
+  license:
+    name: Proprietary
+servers:
+- url: https://webapi.production.splitit.com
+  description: Production
+- url: https://web-api-v3.sandbox.splitit.com
+  description: Sandbox
+security:
+- bearerAuth: []
+tags:
+- name: Eligibility
+  description: Check shopper eligibility for installment plans
+paths:
+  /check-eligibility:
+    post:
+      tags:
+      - Eligibility
+      operationId: checkEligibility
+      summary: Check Eligibility
+      description: Verify a shopper's overall eligibility for Splitit installment plans and determine which plans they are eligible for. Use this endpoint before initiating a plan to confirm availability.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckEligibilityRequest'
+      responses:
+        '200':
+          description: Eligibility check result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckEligibilityResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    CheckEligibilityResponse:
+      type: object
+      properties:
+        isEligible:
+          type: boolean
+          description: Whether the shopper is eligible for installment plans
+        eligiblePlans:
+          type: array
+          items:
+            type: object
+            properties:
+              numberOfInstallments:
+                type: integer
+              installmentAmount:
+                $ref: '#/components/schemas/Money'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Splitit error code (e.g., 400-542, 400-563)
+        message:
+          type: string
+          description: Human-readable error description
+        additionalInfo:
+          type: string
+          description: Additional context about the error
+    Money:
+      type: object
+      properties:
+        value:
+          type: number
+          format: float
+          description: Monetary amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
+    PlanData:
+      type: object
+      properties:
+        totalAmount:
+          $ref: '#/components/schemas/Money'
+        numberOfInstallments:
+          type: integer
+          description: Number of monthly installments
+          example: 3
+        refOrderNumber:
+          type: string
+          description: Merchant's reference order number
+        extendedParams:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional merchant-defined key-value parameters
+        firstInstallmentAmount:
+          $ref: '#/components/schemas/Money'
+        firstChargeDate:
+          type: string
+          format: date
+          description: Date of the first installment charge
+    CheckEligibilityRequest:
+      type: object
+      required:
+      - planData
+      properties:
+        planData:
+          $ref: '#/components/schemas/PlanData'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
+    BillingAddress:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+          description: Street address line 1
+        addressLine2:
+          type: string
+          description: Street address line 2
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State or province code
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: US
+        zip:
+          type: string
+          description: Postal/ZIP code
+  responses:
+    InternalServerError:
+      description: Internal Server Error - unexpected server condition
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - token is not authorized or is expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found - resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden - merchant has no right to access this resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable Entity - validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

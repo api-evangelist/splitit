@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+  title: Splitit Account Management System Authentication API
+  description: API for onboarding and managing sub-merchants on the Splitit platform. Enables payment facilitators and marketplace operators to add merchant partners, upload compliance documents, send onboarding invitations, monitor approval status, retrieve pending accounts, and generate time-limited secure login links for merchant portal access.
+  version: '1.0'
+  contact:
+    name: Splitit Developer Support
+    url: https://developers.splitit.com/
+  license:
+    name: Proprietary
+servers:
+- url: https://webapi.production.splitit.com
+  description: Production
+- url: https://web-api-v3.sandbox.splitit.com
+  description: Sandbox
+security:
+- bearerAuth: []
+tags:
+- name: Authentication
+  description: Obtain access tokens
+paths:
+  /token:
+    post:
+      tags:
+      - Authentication
+      operationId: getToken
+      summary: Get Splitit Token
+      description: Authenticate using your client_id and client_secret to obtain a Bearer access token for use in all subsequent API calls.
+      security: []
+      servers:
+      - url: https://id.production.splitit.com/connect
+        description: Production Identity Server
+      - url: https://id.sandbox.splitit.com/connect
+        description: Sandbox Identity Server
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - grant_type
+              - client_id
+              - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                  - client_credentials
+                client_id:
+                  type: string
+                  description: API Username from Merchant Hub
+                client_secret:
+                  type: string
+                  description: Active API password from Merchant Hub
+                scope:
+                  type: string
+                  example: api.v1 api.v3
+      responses:
+        '200':
+          description: Access token issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Invalid credentials
+components:
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
