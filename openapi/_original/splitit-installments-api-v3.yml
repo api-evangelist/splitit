@@ -1,0 +1,807 @@
+openapi: 3.0.3
+info:
+  title: Splitit Installments API v3
+  description: >-
+    The primary REST API for creating and managing credit card installment plans.
+    Enables merchants to check shopper eligibility, create installment plans,
+    verify authorization, fetch and update plans, process refunds, and handle
+    cancellations. All requests use HTTPS with Bearer token authentication
+    obtained via the identity server. Splitit enables merchants to offer
+    shoppers the ability to split existing credit card purchases into monthly
+    installments without requiring new credit applications, additional interest
+    charges, or third-party redirects.
+  version: '3.0'
+  contact:
+    name: Splitit Developer Support
+    url: https://developers.splitit.com/
+  termsOfService: https://www.splitit.com/legal/
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://webapi.production.splitit.com
+    description: Production
+  - url: https://web-api-v3.sandbox.splitit.com
+    description: Sandbox
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Authentication
+    description: Obtain access tokens for API authorization
+  - name: Eligibility
+    description: Check shopper eligibility for installment plans
+  - name: Installment Plans
+    description: Create, initiate, fetch, update, refund, and cancel installment plans
+
+paths:
+  /token:
+    post:
+      tags:
+        - Authentication
+      operationId: getToken
+      summary: Get Splitit Token
+      description: >-
+        Authenticate using your client_id and client_secret to obtain a Bearer
+        access token for use in all subsequent API calls. Tokens are time-limited
+        and must be refreshed when expired.
+      security: []
+      servers:
+        - url: https://id.production.splitit.com/connect
+          description: Production Identity Server
+        - url: https://id.sandbox.splitit.com/connect
+          description: Sandbox Identity Server
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - grant_type
+                - client_id
+                - client_secret
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                    - client_credentials
+                  description: Must be "client_credentials"
+                  example: client_credentials
+                scope:
+                  type: string
+                  description: API scope(s) to request access to
+                  example: api.v1 api.v3
+                client_id:
+                  type: string
+                  description: API Username from Merchant Hub credentials
+                client_secret:
+                  type: string
+                  description: Active API password from Merchant Hub
+      responses:
+        '200':
+          description: Access token issued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Unauthorized - invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /check-eligibility:
+    post:
+      tags:
+        - Eligibility
+      operationId: checkEligibility
+      summary: Check Eligibility
+      description: >-
+        Verify a shopper's overall eligibility for Splitit installment plans and
+        determine which plans they are eligible for. Use this endpoint before
+        initiating a plan to confirm availability.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckEligibilityRequest'
+      responses:
+        '200':
+          description: Eligibility check result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckEligibilityResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /installmentplans:
+    post:
+      tags:
+        - Installment Plans
+      operationId: createInstallmentPlan
+      summary: Create Installment Plan
+      description: >-
+        Establish an installment plan with immediate authorization. This is the
+        primary endpoint for merchants using direct API integration with full
+        PCI DSS compliance. The plan is created and authorized in a single call.
+        Requires SAQ-D certification.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstallmentPlanRequest'
+      responses:
+        '200':
+          description: Installment plan created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstallmentPlanResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /installmentplans/initiate:
+    post:
+      tags:
+        - Installment Plans
+      operationId: initiateInstallmentPlan
+      summary: Initiate Installment Plan
+      description: >-
+        Establish an installment plan without finalizing it. Designed for use
+        with Splitit's pre-built checkout solutions (Payment Form, Flex Form).
+        Requires only SAQ-A certification. Multiple calls for the same plan
+        update existing data.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitiateInstallmentPlanRequest'
+      responses:
+        '200':
+          description: Installment plan initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiateInstallmentPlanResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /installmentplans/{installmentPlanNumber}/verifyauthorization:
+    get:
+      tags:
+        - Installment Plans
+      operationId: verifyAuthorization
+      summary: Verify Authorization
+      description: >-
+        Confirm authorization of an installment plan when authorization and
+        order closure do not occur simultaneously. Used after Payment Form,
+        Flex Form checkout, or 3DS redirection to verify the plan has been
+        properly authorized before fulfilling the order.
+      parameters:
+        - name: installmentPlanNumber
+          in: path
+          required: true
+          description: The unique installment plan number returned from initiate
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Authorization verified successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyAuthorizationResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /installmentplans/{installmentPlanNumber}:
+    get:
+      tags:
+        - Installment Plans
+      operationId: fetchPlanByNumber
+      summary: Fetch Plan by Number
+      description: Retrieve the details of an installment plan using the plan number.
+      parameters:
+        - name: installmentPlanNumber
+          in: path
+          required: true
+          description: The unique installment plan number
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Installment plan details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstallmentPlanResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Installment Plans
+      operationId: updatePlanByNumber
+      summary: Update Plan by Number
+      description: >-
+        Modify installment plan details after authorization. Use to update order
+        details, shipping information, or other plan attributes post-authorization.
+      parameters:
+        - name: installmentPlanNumber
+          in: path
+          required: true
+          description: The unique installment plan number
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInstallmentPlanRequest'
+      responses:
+        '200':
+          description: Installment plan updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstallmentPlanResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /installmentplans/search:
+    post:
+      tags:
+        - Installment Plans
+      operationId: fetchPlansByAlternateField
+      summary: Fetch Plan(s) by Alternate Field
+      description: >-
+        Retrieve installment plan(s) using alternate identifiers such as
+        RefOrderNumber or ExtendedParams when the installment plan number
+        is not available.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchInstallmentPlanRequest'
+      responses:
+        '200':
+          description: Installment plan(s) matching search criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchInstallmentPlanResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /installmentplans/updatebyalternatefield:
+    put:
+      tags:
+        - Installment Plans
+      operationId: updatePlanByAlternateField
+      summary: Update Plan By Alternate Field
+      description: >-
+        Modify installment plan details using alternate identifiers such as
+        RefOrderNumber or ExtendedParams instead of the plan number.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateByAlternateFieldRequest'
+      responses:
+        '200':
+          description: Installment plan updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstallmentPlanResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /installmentplans/{installmentPlanNumber}/refund:
+    post:
+      tags:
+        - Installment Plans
+      operationId: refundPlan
+      summary: Refund a Plan
+      description: >-
+        Process a partial or complete refund for an installment plan. Supports
+        both full refunds and partial refunds for installment transactions.
+      parameters:
+        - name: installmentPlanNumber
+          in: path
+          required: true
+          description: The unique installment plan number
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundRequest'
+      responses:
+        '200':
+          description: Refund processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained from the Splitit Identity Server
+
+  responses:
+    Unauthorized:
+      description: Unauthorized - token is not authorized or is expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden - merchant has no right to access this resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found - resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable Entity - validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal Server Error - unexpected server condition
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Bearer token for use in API requests
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: integer
+          description: Token lifetime in seconds
+
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Splitit error code (e.g., 400-542, 400-563)
+        message:
+          type: string
+          description: Human-readable error description
+        additionalInfo:
+          type: string
+          description: Additional context about the error
+
+    Money:
+      type: object
+      properties:
+        value:
+          type: number
+          format: float
+          description: Monetary amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
+
+    CreditCardDetails:
+      type: object
+      properties:
+        cardNumber:
+          type: string
+          description: Full credit card number (PAN)
+        cardExpYear:
+          type: integer
+          description: Card expiration year (4 digits)
+        cardExpMonth:
+          type: integer
+          description: Card expiration month (1-12)
+        cardCvv:
+          type: string
+          description: Card security code (CVV/CVC)
+        cardHolderFullName:
+          type: string
+          description: Name as it appears on the card
+
+    BillingAddress:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+          description: Street address line 1
+        addressLine2:
+          type: string
+          description: Street address line 2
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State or province code
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: US
+        zip:
+          type: string
+          description: Postal/ZIP code
+
+    ConsumerData:
+      type: object
+      properties:
+        fullName:
+          type: string
+          description: Shopper's full name
+        email:
+          type: string
+          format: email
+          description: Shopper's email address
+        phoneNumber:
+          type: string
+          description: Shopper's phone number
+        civilId:
+          type: string
+          description: National identification number if applicable
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
+
+    PlanData:
+      type: object
+      properties:
+        totalAmount:
+          $ref: '#/components/schemas/Money'
+        numberOfInstallments:
+          type: integer
+          description: Number of monthly installments
+          example: 3
+        refOrderNumber:
+          type: string
+          description: Merchant's reference order number
+        extendedParams:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional merchant-defined key-value parameters
+        firstInstallmentAmount:
+          $ref: '#/components/schemas/Money'
+        firstChargeDate:
+          type: string
+          format: date
+          description: Date of the first installment charge
+
+    CheckEligibilityRequest:
+      type: object
+      required:
+        - planData
+      properties:
+        planData:
+          $ref: '#/components/schemas/PlanData'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
+
+    CheckEligibilityResponse:
+      type: object
+      properties:
+        isEligible:
+          type: boolean
+          description: Whether the shopper is eligible for installment plans
+        eligiblePlans:
+          type: array
+          items:
+            type: object
+            properties:
+              numberOfInstallments:
+                type: integer
+              installmentAmount:
+                $ref: '#/components/schemas/Money'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+
+    CreateInstallmentPlanRequest:
+      type: object
+      required:
+        - planData
+        - creditCardDetails
+        - consumerData
+      properties:
+        planData:
+          $ref: '#/components/schemas/PlanData'
+        creditCardDetails:
+          $ref: '#/components/schemas/CreditCardDetails'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
+        consumerData:
+          $ref: '#/components/schemas/ConsumerData'
+        redirectUrls:
+          $ref: '#/components/schemas/RedirectUrls'
+
+    InitiateInstallmentPlanRequest:
+      type: object
+      required:
+        - planData
+      properties:
+        planData:
+          $ref: '#/components/schemas/PlanData'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
+        consumerData:
+          $ref: '#/components/schemas/ConsumerData'
+        redirectUrls:
+          $ref: '#/components/schemas/RedirectUrls'
+        ux:
+          $ref: '#/components/schemas/UXSettings'
+
+    InitiateInstallmentPlanResponse:
+      type: object
+      properties:
+        installmentPlanNumber:
+          type: string
+          description: Unique identifier for the installment plan
+        checkoutUrl:
+          type: string
+          format: uri
+          description: URL to redirect the shopper to complete checkout
+        status:
+          type: string
+          description: Current status of the plan
+
+    RedirectUrls:
+      type: object
+      properties:
+        succeeded:
+          type: string
+          format: uri
+          description: URL to redirect to on successful payment
+        failed:
+          type: string
+          format: uri
+          description: URL to redirect to on payment failure
+        cancelled:
+          type: string
+          format: uri
+          description: URL to redirect to if the shopper cancels
+
+    UXSettings:
+      type: object
+      properties:
+        returnUrl:
+          type: string
+          format: uri
+          description: Return URL after checkout completion
+
+    VerifyAuthorizationResponse:
+      type: object
+      properties:
+        isPlanApproved:
+          type: boolean
+          description: Whether the installment plan has been approved
+        installmentPlanNumber:
+          type: string
+          description: The plan number being verified
+        status:
+          type: string
+          description: Authorization status
+
+    InstallmentPlanResponse:
+      type: object
+      properties:
+        installmentPlanNumber:
+          type: string
+          description: Unique identifier for the installment plan
+        status:
+          type: string
+          description: Current plan status (e.g., Active, Cancelled, Cleared)
+        planData:
+          $ref: '#/components/schemas/PlanData'
+        consumerData:
+          $ref: '#/components/schemas/ConsumerData'
+        installments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Installment'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+
+    Installment:
+      type: object
+      properties:
+        installmentNumber:
+          type: integer
+          description: Sequential installment number
+        amount:
+          $ref: '#/components/schemas/Money'
+        processDateTime:
+          type: string
+          format: date-time
+          description: Scheduled or actual processing date/time
+        status:
+          type: string
+          description: Status of this installment
+
+    SearchInstallmentPlanRequest:
+      type: object
+      properties:
+        refOrderNumber:
+          type: string
+          description: Merchant reference order number
+        extendedParams:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs to match against
+
+    SearchInstallmentPlanResponse:
+      type: object
+      properties:
+        installmentPlans:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallmentPlanResponse'
+        totalCount:
+          type: integer
+
+    UpdateInstallmentPlanRequest:
+      type: object
+      properties:
+        refOrderNumber:
+          type: string
+          description: Updated merchant reference order number
+        extendedParams:
+          type: object
+          additionalProperties:
+            type: string
+          description: Updated key-value parameters
+        shippingAddress:
+          $ref: '#/components/schemas/BillingAddress'
+        captureServiceTrackingInfo:
+          type: string
+          description: Tracking information for shipped orders
+
+    UpdateByAlternateFieldRequest:
+      type: object
+      required:
+        - identifier
+      properties:
+        identifier:
+          type: object
+          properties:
+            refOrderNumber:
+              type: string
+              description: Merchant reference order number to identify the plan
+            extendedParams:
+              type: object
+              additionalProperties:
+                type: string
+        updateData:
+          $ref: '#/components/schemas/UpdateInstallmentPlanRequest'
+
+    RefundRequest:
+      type: object
+      required:
+        - amount
+      properties:
+        amount:
+          $ref: '#/components/schemas/Money'
+        refundStrategy:
+          type: string
+          enum:
+            - FutureInstallmentsFirst
+            - FutureInstallmentsLast
+            - FutureInstallmentsLast_PaidFirstInstallmentsFirst
+          description: Strategy for applying partial refunds against installments
+
+    RefundResponse:
+      type: object
+      properties:
+        refundId:
+          type: string
+          description: Unique identifier for the refund
+        installmentPlanNumber:
+          type: string
+          description: The plan that was refunded
+        refundedAmount:
+          $ref: '#/components/schemas/Money'
+        status:
+          type: string
+          description: Status of the refund

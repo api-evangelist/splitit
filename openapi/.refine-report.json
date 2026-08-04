@@ -1,0 +1,20 @@
+{
+  "provider": "splitit",
+  "sources": [
+    "splitit-authentication-api-openapi.yml",
+    "splitit-eligibility-api-openapi.yml",
+    "splitit-installment-plans-api-openapi.yml",
+    "splitit-merchant-management-api-openapi.yml"
+  ],
+  "outputs": [
+    "splitit-authentication-api-openapi.yml",
+    "splitit-eligibility-api-openapi.yml",
+    "splitit-installment-plans-api-openapi.yml",
+    "splitit-merchant-management-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

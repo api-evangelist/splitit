@@ -1,0 +1,420 @@
+{
+  "info": {
+    "_postman_id": "d9a36794-0278-4e83-9ce8-c9a502818b8c",
+    "name": "Splitit Account Management System Authentication Eligibility API",
+    "description": "API for onboarding and managing sub-merchants on the Splitit platform. Enables payment facilitators and marketplace operators to add merchant partners, upload compliance documents, send onboarding invitations, monitor approval status, retrieve pending accounts, and generate time-limited secure login links for merchant portal access.\n\nContact Support:\n Name: Splitit Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:59:52.000Z",
+    "updatedAt": "2026-07-28T02:59:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d9a36794-0278-4e83-9ce8-c9a502818b8c"
+  },
+  "item": [
+    {
+      "name": "check-eligibility",
+      "item": [
+        {
+          "name": "Check Eligibility",
+          "id": "1ecbd013-4d6e-4154-97bf-7b4f3973aefa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor2\": \"<string>\",\n      \"sintd2b\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/check-eligibility",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "check-eligibility"
+              ]
+            },
+            "description": "Verify a shopper's overall eligibility for Splitit installment plans and determine which plans they are eligible for. Use this endpoint before initiating a plan to confirm availability."
+          },
+          "response": [
+            {
+              "id": "24516f0e-782c-4662-ae1e-84b22d604668",
+              "name": "Eligibility check result",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor2\": \"<string>\",\n      \"sintd2b\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/check-eligibility",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "check-eligibility"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"isEligible\": \"<boolean>\",\n  \"eligiblePlans\": [\n    {\n      \"numberOfInstallments\": \"<integer>\",\n      \"installmentAmount\": {\n        \"value\": \"<float>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"numberOfInstallments\": \"<integer>\",\n      \"installmentAmount\": {\n        \"value\": \"<float>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"errors\": [\n    {\n      \"errorCode\": \"<string>\",\n      \"message\": \"<string>\",\n      \"additionalInfo\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"<string>\",\n      \"message\": \"<string>\",\n      \"additionalInfo\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:59:52.000Z",
+              "updatedAt": "2026-07-28T02:59:52.000Z",
+              "uid": "35240-24516f0e-782c-4662-ae1e-84b22d604668"
+            },
+            {
+              "id": "138aa7b1-cc39-4a63-a154-e77be8adf42d",
+              "name": "Unauthorized - token is not authorized or is expired",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor2\": \"<string>\",\n      \"sintd2b\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/check-eligibility",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "check-eligibility"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:59:52.000Z",
+              "updatedAt": "2026-07-28T02:59:52.000Z",
+              "uid": "35240-138aa7b1-cc39-4a63-a154-e77be8adf42d"
+            },
+            {
+              "id": "45975a9f-fb6b-4b93-914f-a4918fb89237",
+              "name": "Forbidden - merchant has no right to access this resource",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor2\": \"<string>\",\n      \"sintd2b\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/check-eligibility",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "check-eligibility"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:59:52.000Z",
+              "updatedAt": "2026-07-28T02:59:52.000Z",
+              "uid": "35240-45975a9f-fb6b-4b93-914f-a4918fb89237"
+            },
+            {
+              "id": "c34300b2-197e-4ed2-a66f-8c9bbf16b4b5",
+              "name": "Not Found - resource does not exist",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor2\": \"<string>\",\n      \"sintd2b\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/check-eligibility",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "check-eligibility"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:59:52.000Z",
+              "updatedAt": "2026-07-28T02:59:52.000Z",
+              "uid": "35240-c34300b2-197e-4ed2-a66f-8c9bbf16b4b5"
+            },
+            {
+              "id": "61d75a29-3a13-431f-8111-e78f77377c31",
+              "name": "Unprocessable Entity - validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor2\": \"<string>\",\n      \"sintd2b\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/check-eligibility",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "check-eligibility"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:59:52.000Z",
+              "updatedAt": "2026-07-28T02:59:52.000Z",
+              "uid": "35240-61d75a29-3a13-431f-8111-e78f77377c31"
+            },
+            {
+              "id": "93109688-e133-43be-86e5-0e93fcfb8a17",
+              "name": "Internal Server Error - unexpected server condition",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor2\": \"<string>\",\n      \"sintd2b\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/check-eligibility",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "check-eligibility"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:59:52.000Z",
+              "updatedAt": "2026-07-28T02:59:52.000Z",
+              "uid": "35240-93109688-e133-43be-86e5-0e93fcfb8a17"
+            }
+          ],
+          "createdAt": "2026-07-28T02:59:52.000Z",
+          "updatedAt": "2026-07-28T02:59:52.000Z",
+          "uid": "35240-1ecbd013-4d6e-4154-97bf-7b4f3973aefa"
+        }
+      ],
+      "id": "e3829f37-b9d0-46e2-95d6-938d3b4583fa",
+      "createdAt": "2026-07-28T02:59:52.000Z",
+      "updatedAt": "2026-07-28T02:59:52.000Z",
+      "uid": "35240-e3829f37-b9d0-46e2-95d6-938d3b4583fa"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://webapi.production.splitit.com"
+    }
+  ]
+}

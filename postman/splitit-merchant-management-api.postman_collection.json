@@ -1,0 +1,2021 @@
+{
+  "info": {
+    "_postman_id": "6e22e683-39aa-4463-8acd-0fa6c08f1250",
+    "name": "Splitit Account Management System Authentication Merchant Management API",
+    "description": "API for onboarding and managing sub-merchants on the Splitit platform. Enables payment facilitators and marketplace operators to add merchant partners, upload compliance documents, send onboarding invitations, monitor approval status, retrieve pending accounts, and generate time-limited secure login links for merchant portal access.\n\nContact Support:\n Name: Splitit Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:59:54.000Z",
+    "updatedAt": "2026-07-28T02:59:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6e22e683-39aa-4463-8acd-0fa6c08f1250"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "ams",
+          "item": [
+            {
+              "name": "structure",
+              "item": [
+                {
+                  "name": "Structure for Add Merchant Partner Requests",
+                  "id": "eea6020d-a4c4-4010-8b9b-746de4cada61",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/ams/structure",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "ams",
+                        "structure"
+                      ]
+                    },
+                    "description": "Retrieve the required fields and structure for creating merchant partner requests. Use this endpoint to understand required and optional fields before calling Add Merchant Partner."
+                  },
+                  "response": [
+                    {
+                      "id": "aaeb3fa1-5969-468d-9021-4e9424ddad5b",
+                      "name": "Merchant partner request structure",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/ams/structure",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "ams",
+                            "structure"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"requiredFields\": [\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldType\": \"<string>\",\n      \"isRequired\": \"<boolean>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"fieldName\": \"<string>\",\n      \"fieldType\": \"<string>\",\n      \"isRequired\": \"<boolean>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-aaeb3fa1-5969-468d-9021-4e9424ddad5b"
+                    },
+                    {
+                      "id": "70d5c985-2f12-4be5-92e1-eace5ffef070",
+                      "name": "Unauthorized - token is not authorized or is expired",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/ams/structure",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "ams",
+                            "structure"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-70d5c985-2f12-4be5-92e1-eace5ffef070"
+                    },
+                    {
+                      "id": "f1932c7c-903c-4007-94d1-7972778def76",
+                      "name": "Forbidden - no right to access this resource",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/ams/structure",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "ams",
+                            "structure"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-f1932c7c-903c-4007-94d1-7972778def76"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:59:54.000Z",
+                  "updatedAt": "2026-07-28T02:59:54.000Z",
+                  "uid": "35240-eea6020d-a4c4-4010-8b9b-746de4cada61"
+                }
+              ],
+              "id": "a20d897c-00fd-480c-9ec2-1c7e0ab5cea9",
+              "createdAt": "2026-07-28T02:59:54.000Z",
+              "updatedAt": "2026-07-28T02:59:54.000Z",
+              "uid": "35240-a20d897c-00fd-480c-9ec2-1c7e0ab5cea9"
+            },
+            {
+              "name": "merchants",
+              "item": [
+                {
+                  "name": "{merchantId}",
+                  "item": [
+                    {
+                      "name": "documents",
+                      "item": [
+                        {
+                          "name": "Upload Documents",
+                          "id": "dde9915b-1d81-4e6e-9996-8ce5c4ca17b1",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "formdata",
+                              "formdata": [
+                                {
+                                  "description": "Type of document being uploaded",
+                                  "key": "documentType",
+                                  "value": "<string>",
+                                  "type": "text"
+                                },
+                                {
+                                  "description": "The document file to upload",
+                                  "key": "file",
+                                  "type": "file",
+                                  "value": null
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/documents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "ams",
+                                "merchants",
+                                ":merchantId",
+                                "documents"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "eac9f74c-f289-4e0f-a6ad-0e0058021e2c",
+                                  "key": "merchantId",
+                                  "value": "<string>",
+                                  "description": "(Required) The merchant partner identifier"
+                                }
+                              ]
+                            },
+                            "description": "Submit agreements and compliance documentation for a merchant partner. Supports uploading required KYC/KYB documents and agreements needed for Splitit onboarding approval."
+                          },
+                          "response": [
+                            {
+                              "id": "8ac31f40-715b-41e1-9c60-bddfe761a893",
+                              "name": "Document uploaded successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "Type of document being uploaded",
+                                      "key": "documentType",
+                                      "value": "<string>",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "description": "The document file to upload",
+                                      "key": "file",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"documentId\": \"<string>\",\n  \"documentType\": \"<string>\",\n  \"uploadedAt\": \"<dateTime>\",\n  \"status\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-8ac31f40-715b-41e1-9c60-bddfe761a893"
+                            },
+                            {
+                              "id": "195eef9c-adfa-4597-91a9-0c8926ef40ca",
+                              "name": "Unauthorized - token is not authorized or is expired",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "Type of document being uploaded",
+                                      "key": "documentType",
+                                      "value": "<string>",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "description": "The document file to upload",
+                                      "key": "file",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-195eef9c-adfa-4597-91a9-0c8926ef40ca"
+                            },
+                            {
+                              "id": "669fa7de-998b-4530-b1af-fb45609ed193",
+                              "name": "Forbidden - no right to access this resource",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "Type of document being uploaded",
+                                      "key": "documentType",
+                                      "value": "<string>",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "description": "The document file to upload",
+                                      "key": "file",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-669fa7de-998b-4530-b1af-fb45609ed193"
+                            },
+                            {
+                              "id": "8c86ee74-3809-423c-af2a-d44dbce740bb",
+                              "name": "Not Found - resource does not exist",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "Type of document being uploaded",
+                                      "key": "documentType",
+                                      "value": "<string>",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "description": "The document file to upload",
+                                      "key": "file",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-8c86ee74-3809-423c-af2a-d44dbce740bb"
+                            },
+                            {
+                              "id": "d6149fb3-9e3e-464d-b36d-72de398e428b",
+                              "name": "Unprocessable Entity - validation error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "Type of document being uploaded",
+                                      "key": "documentType",
+                                      "value": "<string>",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "description": "The document file to upload",
+                                      "key": "file",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-d6149fb3-9e3e-464d-b36d-72de398e428b"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-dde9915b-1d81-4e6e-9996-8ce5c4ca17b1"
+                        }
+                      ],
+                      "id": "e2b434a1-a39e-4cf4-95b3-8c4f95974707",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-e2b434a1-a39e-4cf4-95b3-8c4f95974707"
+                    },
+                    {
+                      "name": "invite",
+                      "item": [
+                        {
+                          "name": "Send Invite Emails",
+                          "id": "9322e121-fc2c-4e58-a2a8-904e55af3438",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<email>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/invite",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "ams",
+                                "merchants",
+                                ":merchantId",
+                                "invite"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "3caa40bd-af51-476b-a3bb-c0dad7954f01",
+                                  "key": "merchantId",
+                                  "value": "<string>",
+                                  "description": "(Required) The merchant partner identifier"
+                                }
+                              ]
+                            },
+                            "description": "Distribute prefilled onboarding forms to merchant partners via email. The invite email contains a link to a prefilled application form that the merchant can complete to finalize their Splitit onboarding."
+                          },
+                          "response": [
+                            {
+                              "id": "aed23333-ddcd-41f3-af75-4f1b765aab56",
+                              "name": "Invite email sent successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"email\": \"<email>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/invite",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "invite"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"success\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"sentAt\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-aed23333-ddcd-41f3-af75-4f1b765aab56"
+                            },
+                            {
+                              "id": "d092b1ec-7ef1-45e8-bab0-ac9fa670ae3c",
+                              "name": "Unauthorized - token is not authorized or is expired",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"email\": \"<email>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/invite",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "invite"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-d092b1ec-7ef1-45e8-bab0-ac9fa670ae3c"
+                            },
+                            {
+                              "id": "90ce2059-31b4-4cc9-9238-0844856ed36b",
+                              "name": "Forbidden - no right to access this resource",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"email\": \"<email>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/invite",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "invite"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-90ce2059-31b4-4cc9-9238-0844856ed36b"
+                            },
+                            {
+                              "id": "21d697bf-6857-4dd6-a30a-31b213412e6a",
+                              "name": "Not Found - resource does not exist",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"email\": \"<email>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/invite",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "invite"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-21d697bf-6857-4dd6-a30a-31b213412e6a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-9322e121-fc2c-4e58-a2a8-904e55af3438"
+                        }
+                      ],
+                      "id": "dacd2511-4189-4f6d-9e4a-875f8309db89",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-dacd2511-4189-4f6d-9e4a-875f8309db89"
+                    },
+                    {
+                      "name": "status",
+                      "item": [
+                        {
+                          "name": "Get Onboarding Status",
+                          "id": "e999c52a-7a2e-44e6-8636-d48606d4133d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/status",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "ams",
+                                "merchants",
+                                ":merchantId",
+                                "status"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2760288e-9f7c-4830-9488-5614776ba007",
+                                  "key": "merchantId",
+                                  "value": "<string>",
+                                  "description": "(Required) The merchant partner identifier"
+                                }
+                              ]
+                            },
+                            "description": "Check the approval progress of a merchant partner account. Returns the current onboarding status including any pending items or required actions."
+                          },
+                          "response": [
+                            {
+                              "id": "07659af8-f063-4801-9224-09ed51fbc794",
+                              "name": "Merchant onboarding status",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/status",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "status"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"merchantId\": \"<string>\",\n  \"status\": \"Approved\",\n  \"pendingItems\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"updatedAt\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-07659af8-f063-4801-9224-09ed51fbc794"
+                            },
+                            {
+                              "id": "5cfb51d7-4588-45cd-8f01-d48b536d3136",
+                              "name": "Unauthorized - token is not authorized or is expired",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/status",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "status"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-5cfb51d7-4588-45cd-8f01-d48b536d3136"
+                            },
+                            {
+                              "id": "304b6150-9184-41fe-be75-aea9dbdc363a",
+                              "name": "Forbidden - no right to access this resource",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/status",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "status"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-304b6150-9184-41fe-be75-aea9dbdc363a"
+                            },
+                            {
+                              "id": "29b14fc8-6b81-41eb-9525-b45ec4e35f2d",
+                              "name": "Not Found - resource does not exist",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/status",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "status"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-29b14fc8-6b81-41eb-9525-b45ec4e35f2d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-e999c52a-7a2e-44e6-8636-d48606d4133d"
+                        }
+                      ],
+                      "id": "e32a6013-19f1-43ef-be03-7bf7f95a3d42",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-e32a6013-19f1-43ef-be03-7bf7f95a3d42"
+                    },
+                    {
+                      "name": "login-link",
+                      "item": [
+                        {
+                          "name": "Generate Direct Login Link",
+                          "id": "2f401c9e-203b-4314-8ee0-89ce7632937f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/login-link",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "ams",
+                                "merchants",
+                                ":merchantId",
+                                "login-link"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f0de37c1-4178-450c-8913-93ceffceadfc",
+                                  "key": "merchantId",
+                                  "value": "<string>",
+                                  "description": "(Required) The merchant partner identifier"
+                                }
+                              ]
+                            },
+                            "description": "Create a secure, time-limited portal access link for a merchant partner without requiring credentials. The generated link provides direct access to the Splitit Merchant Hub for the specified merchant."
+                          },
+                          "response": [
+                            {
+                              "id": "10656235-fc58-47a3-b04b-4cc81dbf8d3c",
+                              "name": "Login link generated successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/login-link",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "login-link"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"loginUrl\": \"<uri>\",\n  \"expiresAt\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-10656235-fc58-47a3-b04b-4cc81dbf8d3c"
+                            },
+                            {
+                              "id": "f4bb00c4-5a01-40b2-a859-895cba7028cf",
+                              "name": "Unauthorized - token is not authorized or is expired",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/login-link",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "login-link"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-f4bb00c4-5a01-40b2-a859-895cba7028cf"
+                            },
+                            {
+                              "id": "c1464a9f-c699-4e36-9dee-d2817759a9ba",
+                              "name": "Forbidden - no right to access this resource",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/login-link",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "login-link"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-c1464a9f-c699-4e36-9dee-d2817759a9ba"
+                            },
+                            {
+                              "id": "4d7f82ca-ce80-444e-ae82-63d4637a1765",
+                              "name": "Not Found - resource does not exist",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/ams/merchants/:merchantId/login-link",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "ams",
+                                    "merchants",
+                                    ":merchantId",
+                                    "login-link"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "merchantId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:59:54.000Z",
+                              "updatedAt": "2026-07-28T02:59:54.000Z",
+                              "uid": "35240-4d7f82ca-ce80-444e-ae82-63d4637a1765"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-2f401c9e-203b-4314-8ee0-89ce7632937f"
+                        }
+                      ],
+                      "id": "d20f5a3d-3b29-421d-93fc-9ef5f3c046f5",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-d20f5a3d-3b29-421d-93fc-9ef5f3c046f5"
+                    }
+                  ],
+                  "id": "9901cf78-bcbc-4b56-a4b5-5cd00ae6cbc6",
+                  "createdAt": "2026-07-28T02:59:54.000Z",
+                  "updatedAt": "2026-07-28T02:59:54.000Z",
+                  "uid": "35240-9901cf78-bcbc-4b56-a4b5-5cd00ae6cbc6"
+                },
+                {
+                  "name": "pending",
+                  "item": [
+                    {
+                      "name": "Get Pending Accounts",
+                      "id": "50fe6210-b3a6-44cd-b43a-44a28ea459f8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/ams/merchants/pending",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "ams",
+                            "merchants",
+                            "pending"
+                          ]
+                        },
+                        "description": "Retrieve all merchant accounts that are still pending Splitit approval. Use this endpoint to monitor the onboarding pipeline and follow up with merchants who have not yet completed the process."
+                      },
+                      "response": [
+                        {
+                          "id": "813f7a85-81cd-4231-a851-25f72cdc9198",
+                          "name": "List of pending merchant accounts",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/ams/merchants/pending",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "ams",
+                                "merchants",
+                                "pending"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"merchants\": [\n    {\n      \"merchantId\": \"<string>\",\n      \"status\": \"<string>\",\n      \"businessName\": \"<string>\",\n      \"email\": \"<email>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    {\n      \"merchantId\": \"<string>\",\n      \"status\": \"<string>\",\n      \"businessName\": \"<string>\",\n      \"email\": \"<email>\",\n      \"createdAt\": \"<dateTime>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-813f7a85-81cd-4231-a851-25f72cdc9198"
+                        },
+                        {
+                          "id": "9f4468cd-c0a6-4e29-bbbf-3513425dfcf6",
+                          "name": "Unauthorized - token is not authorized or is expired",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/ams/merchants/pending",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "ams",
+                                "merchants",
+                                "pending"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-9f4468cd-c0a6-4e29-bbbf-3513425dfcf6"
+                        },
+                        {
+                          "id": "a4735fe2-acac-45c1-a627-c062bcf9769a",
+                          "name": "Forbidden - no right to access this resource",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/ams/merchants/pending",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "ams",
+                                "merchants",
+                                "pending"
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:59:54.000Z",
+                          "updatedAt": "2026-07-28T02:59:54.000Z",
+                          "uid": "35240-a4735fe2-acac-45c1-a627-c062bcf9769a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-50fe6210-b3a6-44cd-b43a-44a28ea459f8"
+                    }
+                  ],
+                  "id": "6022a280-a69f-4b29-a18b-65aec6e503b5",
+                  "createdAt": "2026-07-28T02:59:54.000Z",
+                  "updatedAt": "2026-07-28T02:59:54.000Z",
+                  "uid": "35240-6022a280-a69f-4b29-a18b-65aec6e503b5"
+                },
+                {
+                  "name": "Add Merchant Partner",
+                  "id": "784ec2cd-9963-4e39-bd7a-840e4949550d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"businessName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"businessType\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"businessAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"website\": \"<uri>\",\n  \"taxId\": \"<string>\",\n  \"contactName\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/ams/merchants",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "ams",
+                        "merchants"
+                      ]
+                    },
+                    "description": "Onboard a new sub-merchant partner to the Splitit platform. Provides required business and compliance information for the new merchant. Payment facilitators and marketplace operators use this endpoint to expand their merchant network on Splitit."
+                  },
+                  "response": [
+                    {
+                      "id": "4a89052d-3996-47fd-8e85-c119ed51fefb",
+                      "name": "Merchant partner added successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"businessName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"businessType\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"businessAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"website\": \"<uri>\",\n  \"taxId\": \"<string>\",\n  \"contactName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/ams/merchants",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "ams",
+                            "merchants"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"merchantId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"businessName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-4a89052d-3996-47fd-8e85-c119ed51fefb"
+                    },
+                    {
+                      "id": "b0675d9b-5006-418f-89f9-74e5222ef4f0",
+                      "name": "Unauthorized - token is not authorized or is expired",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"businessName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"businessType\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"businessAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"website\": \"<uri>\",\n  \"taxId\": \"<string>\",\n  \"contactName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/ams/merchants",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "ams",
+                            "merchants"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-b0675d9b-5006-418f-89f9-74e5222ef4f0"
+                    },
+                    {
+                      "id": "330eb1b8-fe5d-4046-b89b-1455f58a54da",
+                      "name": "Forbidden - no right to access this resource",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"businessName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"businessType\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"businessAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"website\": \"<uri>\",\n  \"taxId\": \"<string>\",\n  \"contactName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/ams/merchants",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "ams",
+                            "merchants"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-330eb1b8-fe5d-4046-b89b-1455f58a54da"
+                    },
+                    {
+                      "id": "c5dbe515-04f2-4c2b-bd73-0f94ed774f87",
+                      "name": "Unprocessable Entity - validation error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"businessName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"businessType\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"businessAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"website\": \"<uri>\",\n  \"taxId\": \"<string>\",\n  \"contactName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/ams/merchants",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "ams",
+                            "merchants"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-c5dbe515-04f2-4c2b-bd73-0f94ed774f87"
+                    },
+                    {
+                      "id": "02884e70-0fb8-4e4a-aa1e-427063f69aac",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"businessName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"businessType\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"businessAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"website\": \"<uri>\",\n  \"taxId\": \"<string>\",\n  \"contactName\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/ams/merchants",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "ams",
+                            "merchants"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:54.000Z",
+                      "updatedAt": "2026-07-28T02:59:54.000Z",
+                      "uid": "35240-02884e70-0fb8-4e4a-aa1e-427063f69aac"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:59:54.000Z",
+                  "updatedAt": "2026-07-28T02:59:54.000Z",
+                  "uid": "35240-784ec2cd-9963-4e39-bd7a-840e4949550d"
+                }
+              ],
+              "id": "a28f5439-20cc-40d6-b3b2-708b106bef27",
+              "createdAt": "2026-07-28T02:59:54.000Z",
+              "updatedAt": "2026-07-28T02:59:54.000Z",
+              "uid": "35240-a28f5439-20cc-40d6-b3b2-708b106bef27"
+            }
+          ],
+          "id": "bab0c667-ae3a-4415-92d5-7631393ec7bd",
+          "createdAt": "2026-07-28T02:59:54.000Z",
+          "updatedAt": "2026-07-28T02:59:54.000Z",
+          "uid": "35240-bab0c667-ae3a-4415-92d5-7631393ec7bd"
+        }
+      ],
+      "id": "7c37b0bd-da18-475f-83d3-7dcb68f22d87",
+      "createdAt": "2026-07-28T02:59:54.000Z",
+      "updatedAt": "2026-07-28T02:59:54.000Z",
+      "uid": "35240-7c37b0bd-da18-475f-83d3-7dcb68f22d87"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://webapi.production.splitit.com"
+    }
+  ]
+}

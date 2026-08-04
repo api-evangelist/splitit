@@ -1,0 +1,2942 @@
+{
+  "info": {
+    "_postman_id": "2e28fd97-c42c-443f-a803-8591406cfed1",
+    "name": "Splitit Account Management System Authentication Installment Plans API",
+    "description": "API for onboarding and managing sub-merchants on the Splitit platform. Enables payment facilitators and marketplace operators to add merchant partners, upload compliance documents, send onboarding invitations, monitor approval status, retrieve pending accounts, and generate time-limited secure login links for merchant portal access.\n\nContact Support:\n Name: Splitit Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:59:53.000Z",
+    "updatedAt": "2026-07-28T02:59:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2e28fd97-c42c-443f-a803-8591406cfed1"
+  },
+  "item": [
+    {
+      "name": "installmentplans",
+      "item": [
+        {
+          "name": "initiate",
+          "item": [
+            {
+              "name": "Initiate Installment Plan",
+              "id": "ca22b7f4-5093-4466-b9d7-9d84cf9f9e99",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor_3d5\": \"<string>\",\n      \"fugiat2\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"redirectUrls\": {\n    \"succeeded\": \"<uri>\",\n    \"failed\": \"<uri>\",\n    \"cancelled\": \"<uri>\"\n  },\n  \"ux\": {\n    \"returnUrl\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/installmentplans/initiate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "installmentplans",
+                    "initiate"
+                  ]
+                },
+                "description": "Establish an installment plan without finalizing it. Designed for use with Splitit's pre-built checkout solutions (Payment Form, Flex Form). Requires only SAQ-A certification. Multiple calls for the same plan update existing data."
+              },
+              "response": [
+                {
+                  "id": "27155ab0-f4e3-497a-b4e0-e7aec103d86a",
+                  "name": "Installment plan initiated successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor_3d5\": \"<string>\",\n      \"fugiat2\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"redirectUrls\": {\n    \"succeeded\": \"<uri>\",\n    \"failed\": \"<uri>\",\n    \"cancelled\": \"<uri>\"\n  },\n  \"ux\": {\n    \"returnUrl\": \"<uri>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/initiate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "initiate"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"installmentPlanNumber\": \"<string>\",\n  \"checkoutUrl\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-27155ab0-f4e3-497a-b4e0-e7aec103d86a"
+                },
+                {
+                  "id": "a3ade1d3-220a-4852-8858-391943c07221",
+                  "name": "Unauthorized - token is not authorized or is expired",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor_3d5\": \"<string>\",\n      \"fugiat2\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"redirectUrls\": {\n    \"succeeded\": \"<uri>\",\n    \"failed\": \"<uri>\",\n    \"cancelled\": \"<uri>\"\n  },\n  \"ux\": {\n    \"returnUrl\": \"<uri>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/initiate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "initiate"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-a3ade1d3-220a-4852-8858-391943c07221"
+                },
+                {
+                  "id": "24ace434-353f-49ea-a647-fa93024df726",
+                  "name": "Forbidden - merchant has no right to access this resource",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor_3d5\": \"<string>\",\n      \"fugiat2\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"redirectUrls\": {\n    \"succeeded\": \"<uri>\",\n    \"failed\": \"<uri>\",\n    \"cancelled\": \"<uri>\"\n  },\n  \"ux\": {\n    \"returnUrl\": \"<uri>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/initiate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "initiate"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-24ace434-353f-49ea-a647-fa93024df726"
+                },
+                {
+                  "id": "ecd2318b-0bb6-46de-8050-912a7e58f89a",
+                  "name": "Unprocessable Entity - validation error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor_3d5\": \"<string>\",\n      \"fugiat2\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"redirectUrls\": {\n    \"succeeded\": \"<uri>\",\n    \"failed\": \"<uri>\",\n    \"cancelled\": \"<uri>\"\n  },\n  \"ux\": {\n    \"returnUrl\": \"<uri>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/initiate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "initiate"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-ecd2318b-0bb6-46de-8050-912a7e58f89a"
+                },
+                {
+                  "id": "89554879-5b62-41c2-9203-d581f5ef1fd7",
+                  "name": "Internal Server Error - unexpected server condition",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"tempor_3d5\": \"<string>\",\n      \"fugiat2\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"redirectUrls\": {\n    \"succeeded\": \"<uri>\",\n    \"failed\": \"<uri>\",\n    \"cancelled\": \"<uri>\"\n  },\n  \"ux\": {\n    \"returnUrl\": \"<uri>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/initiate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "initiate"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-89554879-5b62-41c2-9203-d581f5ef1fd7"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-ca22b7f4-5093-4466-b9d7-9d84cf9f9e99"
+            }
+          ],
+          "id": "0f565c6a-caef-45af-b8c6-fd46408bb174",
+          "createdAt": "2026-07-28T02:59:53.000Z",
+          "updatedAt": "2026-07-28T02:59:53.000Z",
+          "uid": "35240-0f565c6a-caef-45af-b8c6-fd46408bb174"
+        },
+        {
+          "name": "{installmentPlanNumber}",
+          "item": [
+            {
+              "name": "verifyauthorization",
+              "item": [
+                {
+                  "name": "Verify Authorization",
+                  "id": "4702459d-e4ab-4ee3-941b-c0d5486dffc1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/verifyauthorization",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber",
+                        "verifyauthorization"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3698e800-4704-42c7-92bc-f46c21bd7305",
+                          "key": "installmentPlanNumber",
+                          "value": "<string>",
+                          "description": "(Required) The unique installment plan number returned from initiate"
+                        }
+                      ]
+                    },
+                    "description": "Confirm authorization of an installment plan when authorization and order closure do not occur simultaneously. Used after Payment Form, Flex Form checkout, or 3DS redirection to verify the plan has been properly authorized before fulfilling the order."
+                  },
+                  "response": [
+                    {
+                      "id": "f6768a1a-dbc7-4a0a-9d4e-d71e80d55cf7",
+                      "name": "Authorization verified successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/verifyauthorization",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "installmentplans",
+                            ":installmentPlanNumber",
+                            "verifyauthorization"
+                          ],
+                          "variable": [
+                            {
+                              "key": "installmentPlanNumber"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"isPlanApproved\": \"<boolean>\",\n  \"installmentPlanNumber\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-f6768a1a-dbc7-4a0a-9d4e-d71e80d55cf7"
+                    },
+                    {
+                      "id": "1024b53d-9420-41e3-bbf7-be3b216a80e3",
+                      "name": "Unauthorized - token is not authorized or is expired",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/verifyauthorization",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "installmentplans",
+                            ":installmentPlanNumber",
+                            "verifyauthorization"
+                          ],
+                          "variable": [
+                            {
+                              "key": "installmentPlanNumber"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-1024b53d-9420-41e3-bbf7-be3b216a80e3"
+                    },
+                    {
+                      "id": "83ea9f68-99ea-49c7-96d8-67170dce8712",
+                      "name": "Forbidden - merchant has no right to access this resource",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/verifyauthorization",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "installmentplans",
+                            ":installmentPlanNumber",
+                            "verifyauthorization"
+                          ],
+                          "variable": [
+                            {
+                              "key": "installmentPlanNumber"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-83ea9f68-99ea-49c7-96d8-67170dce8712"
+                    },
+                    {
+                      "id": "fbfb9088-f820-4ba6-85dd-b8b966bc2c87",
+                      "name": "Not Found - resource does not exist",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/verifyauthorization",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "installmentplans",
+                            ":installmentPlanNumber",
+                            "verifyauthorization"
+                          ],
+                          "variable": [
+                            {
+                              "key": "installmentPlanNumber"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-fbfb9088-f820-4ba6-85dd-b8b966bc2c87"
+                    },
+                    {
+                      "id": "40350a23-bba4-43a4-831d-5b6a9abdd0a0",
+                      "name": "Unprocessable Entity - validation error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/verifyauthorization",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "installmentplans",
+                            ":installmentPlanNumber",
+                            "verifyauthorization"
+                          ],
+                          "variable": [
+                            {
+                              "key": "installmentPlanNumber"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-40350a23-bba4-43a4-831d-5b6a9abdd0a0"
+                    },
+                    {
+                      "id": "d4790364-3a23-4318-b860-687ce58cb3da",
+                      "name": "Internal Server Error - unexpected server condition",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/verifyauthorization",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "installmentplans",
+                            ":installmentPlanNumber",
+                            "verifyauthorization"
+                          ],
+                          "variable": [
+                            {
+                              "key": "installmentPlanNumber"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-d4790364-3a23-4318-b860-687ce58cb3da"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-4702459d-e4ab-4ee3-941b-c0d5486dffc1"
+                }
+              ],
+              "id": "d51aa5e9-b9ae-41ae-9e8f-3c73c7152dc8",
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-d51aa5e9-b9ae-41ae-9e8f-3c73c7152dc8"
+            },
+            {
+              "name": "refund",
+              "item": [
+                {
+                  "name": "Refund a Plan",
+                  "id": "6b82f3b3-88bf-43c0-815e-7f01b13ba621",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"amount\": {\n    \"value\": \"<float>\",\n    \"currency\": \"<string>\"\n  },\n  \"refundStrategy\": \"FutureInstallmentsLast_PaidFirstInstallmentsFirst\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/refund",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber",
+                        "refund"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a4085ae8-db90-405d-a8c7-a7eface4fe50",
+                          "key": "installmentPlanNumber",
+                          "value": "<string>",
+                          "description": "(Required) The unique installment plan number"
+                        }
+                      ]
+                    },
+                    "description": "Process a partial or complete refund for an installment plan. Supports both full refunds and partial refunds for installment transactions."
+                  },
+                  "response": [
+                    {
+                      "id": "e572269d-884c-4a2d-8287-633f057063bc",
+                      "name": "Refund processed successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"amount\": {\n    \"value\": \"<float>\",\n    \"currency\": \"<string>\"\n  },\n  \"refundStrategy\": \"FutureInstallmentsLast_PaidFirstInstallmentsFirst\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/refund",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "installmentplans",
+                            ":installmentPlanNumber",
+                            "refund"
+                          ],
+                          "variable": [
+                            {
+                              "key": "installmentPlanNumber"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"refundId\": \"<string>\",\n  \"installmentPlanNumber\": \"<string>\",\n  \"refundedAmount\": {\n    \"value\": \"<float>\",\n    \"currency\": \"<string>\"\n  },\n  \"status\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-e572269d-884c-4a2d-8287-633f057063bc"
+                    },
+                    {
+                      "id": "111e99a3-08f3-483e-8b50-de58fb5b05b5",
+                      "name": "Unauthorized - token is not authorized or is expired",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"amount\": {\n    \"value\": \"<float>\",\n    \"currency\": \"<string>\"\n  },\n  \"refundStrategy\": \"FutureInstallmentsLast_PaidFirstInstallmentsFirst\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/refund",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "installmentplans",
+                            ":installmentPlanNumber",
+                            "refund"
+                          ],
+                          "variable": [
+                            {
+                              "key": "installmentPlanNumber"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-111e99a3-08f3-483e-8b50-de58fb5b05b5"
+                    },
+                    {
+                      "id": "7e30b842-1502-46bb-a998-b718a70c3635",
+                      "name": "Forbidden - merchant has no right to access this resource",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"amount\": {\n    \"value\": \"<float>\",\n    \"currency\": \"<string>\"\n  },\n  \"refundStrategy\": \"FutureInstallmentsLast_PaidFirstInstallmentsFirst\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/refund",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "installmentplans",
+                            ":installmentPlanNumber",
+                            "refund"
+                          ],
+                          "variable": [
+                            {
+                              "key": "installmentPlanNumber"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-7e30b842-1502-46bb-a998-b718a70c3635"
+                    },
+                    {
+                      "id": "0c4f34ec-61ca-435b-b92d-5fd449bf5352",
+                      "name": "Not Found - resource does not exist",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"amount\": {\n    \"value\": \"<float>\",\n    \"currency\": \"<string>\"\n  },\n  \"refundStrategy\": \"FutureInstallmentsLast_PaidFirstInstallmentsFirst\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/refund",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "installmentplans",
+                            ":installmentPlanNumber",
+                            "refund"
+                          ],
+                          "variable": [
+                            {
+                              "key": "installmentPlanNumber"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-0c4f34ec-61ca-435b-b92d-5fd449bf5352"
+                    },
+                    {
+                      "id": "59fafea8-1b22-49f6-8e49-63360acc3033",
+                      "name": "Unprocessable Entity - validation error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"amount\": {\n    \"value\": \"<float>\",\n    \"currency\": \"<string>\"\n  },\n  \"refundStrategy\": \"FutureInstallmentsLast_PaidFirstInstallmentsFirst\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/refund",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "installmentplans",
+                            ":installmentPlanNumber",
+                            "refund"
+                          ],
+                          "variable": [
+                            {
+                              "key": "installmentPlanNumber"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-59fafea8-1b22-49f6-8e49-63360acc3033"
+                    },
+                    {
+                      "id": "26c0ce7f-f990-497b-b18c-c860fac8574f",
+                      "name": "Internal Server Error - unexpected server condition",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"amount\": {\n    \"value\": \"<float>\",\n    \"currency\": \"<string>\"\n  },\n  \"refundStrategy\": \"FutureInstallmentsLast_PaidFirstInstallmentsFirst\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber/refund",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "installmentplans",
+                            ":installmentPlanNumber",
+                            "refund"
+                          ],
+                          "variable": [
+                            {
+                              "key": "installmentPlanNumber"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:59:53.000Z",
+                      "updatedAt": "2026-07-28T02:59:53.000Z",
+                      "uid": "35240-26c0ce7f-f990-497b-b18c-c860fac8574f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-6b82f3b3-88bf-43c0-815e-7f01b13ba621"
+                }
+              ],
+              "id": "9b96a8af-493c-4015-8268-90aa0886a752",
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-9b96a8af-493c-4015-8268-90aa0886a752"
+            },
+            {
+              "name": "Fetch Plan by Number",
+              "id": "6c6ef08e-fbd4-405c-9cb6-a0b573ee6eaa",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "installmentplans",
+                    ":installmentPlanNumber"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a42c87c9-27ba-4eaf-aa7f-9507bda6f08f",
+                      "key": "installmentPlanNumber",
+                      "value": "<string>",
+                      "description": "(Required) The unique installment plan number"
+                    }
+                  ]
+                },
+                "description": "Retrieve the details of an installment plan using the plan number."
+              },
+              "response": [
+                {
+                  "id": "44207330-3968-40bc-9e41-24da093e89b0",
+                  "name": "Installment plan details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber"
+                      ],
+                      "variable": [
+                        {
+                          "key": "installmentPlanNumber"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"installmentPlanNumber\": \"<string>\",\n  \"status\": \"<string>\",\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"ut_4\": \"<string>\",\n      \"nostrud29\": \"<string>\",\n      \"nisi53c\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"installments\": [\n    {\n      \"installmentNumber\": \"<integer>\",\n      \"amount\": {\n        \"value\": \"<float>\",\n        \"currency\": \"<string>\"\n      },\n      \"processDateTime\": \"<dateTime>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"installmentNumber\": \"<integer>\",\n      \"amount\": {\n        \"value\": \"<float>\",\n        \"currency\": \"<string>\"\n      },\n      \"processDateTime\": \"<dateTime>\",\n      \"status\": \"<string>\"\n    }\n  ],\n  \"errors\": [\n    {\n      \"errorCode\": \"<string>\",\n      \"message\": \"<string>\",\n      \"additionalInfo\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"<string>\",\n      \"message\": \"<string>\",\n      \"additionalInfo\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-44207330-3968-40bc-9e41-24da093e89b0"
+                },
+                {
+                  "id": "5fa6565b-410c-4b0a-abb4-0df45a3e6c59",
+                  "name": "Unauthorized - token is not authorized or is expired",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber"
+                      ],
+                      "variable": [
+                        {
+                          "key": "installmentPlanNumber"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-5fa6565b-410c-4b0a-abb4-0df45a3e6c59"
+                },
+                {
+                  "id": "12276b45-ddeb-4344-aecf-13765b3543ac",
+                  "name": "Forbidden - merchant has no right to access this resource",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber"
+                      ],
+                      "variable": [
+                        {
+                          "key": "installmentPlanNumber"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-12276b45-ddeb-4344-aecf-13765b3543ac"
+                },
+                {
+                  "id": "4cc2c291-3fe2-42c3-aa76-a075d1f54369",
+                  "name": "Not Found - resource does not exist",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber"
+                      ],
+                      "variable": [
+                        {
+                          "key": "installmentPlanNumber"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-4cc2c291-3fe2-42c3-aa76-a075d1f54369"
+                },
+                {
+                  "id": "d4040f72-87c2-4216-a12b-6ac8b8beede2",
+                  "name": "Internal Server Error - unexpected server condition",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber"
+                      ],
+                      "variable": [
+                        {
+                          "key": "installmentPlanNumber"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-d4040f72-87c2-4216-a12b-6ac8b8beede2"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-6c6ef08e-fbd4-405c-9cb6-a0b573ee6eaa"
+            },
+            {
+              "name": "Update Plan by Number",
+              "id": "9433d72b-84da-4e4b-9dc2-3922df3643f5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"exercitationf\": \"<string>\",\n    \"commodo_ce\": \"<string>\",\n    \"dolor_b9\": \"<string>\",\n    \"est_74\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"captureServiceTrackingInfo\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "installmentplans",
+                    ":installmentPlanNumber"
+                  ],
+                  "variable": [
+                    {
+                      "id": "78c1a80e-4d39-4b6a-a2eb-910f2a3d2fdd",
+                      "key": "installmentPlanNumber",
+                      "value": "<string>",
+                      "description": "(Required) The unique installment plan number"
+                    }
+                  ]
+                },
+                "description": "Modify installment plan details after authorization. Use to update order details, shipping information, or other plan attributes post-authorization."
+              },
+              "response": [
+                {
+                  "id": "8fcba39e-5a7f-4d31-804c-25eb484190c7",
+                  "name": "Installment plan updated successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"exercitationf\": \"<string>\",\n    \"commodo_ce\": \"<string>\",\n    \"dolor_b9\": \"<string>\",\n    \"est_74\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"captureServiceTrackingInfo\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber"
+                      ],
+                      "variable": [
+                        {
+                          "key": "installmentPlanNumber"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"installmentPlanNumber\": \"<string>\",\n  \"status\": \"<string>\",\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"ut_4\": \"<string>\",\n      \"nostrud29\": \"<string>\",\n      \"nisi53c\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"installments\": [\n    {\n      \"installmentNumber\": \"<integer>\",\n      \"amount\": {\n        \"value\": \"<float>\",\n        \"currency\": \"<string>\"\n      },\n      \"processDateTime\": \"<dateTime>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"installmentNumber\": \"<integer>\",\n      \"amount\": {\n        \"value\": \"<float>\",\n        \"currency\": \"<string>\"\n      },\n      \"processDateTime\": \"<dateTime>\",\n      \"status\": \"<string>\"\n    }\n  ],\n  \"errors\": [\n    {\n      \"errorCode\": \"<string>\",\n      \"message\": \"<string>\",\n      \"additionalInfo\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"<string>\",\n      \"message\": \"<string>\",\n      \"additionalInfo\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-8fcba39e-5a7f-4d31-804c-25eb484190c7"
+                },
+                {
+                  "id": "a54f6e72-91bb-4098-8394-82f7a974cf84",
+                  "name": "Unauthorized - token is not authorized or is expired",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"exercitationf\": \"<string>\",\n    \"commodo_ce\": \"<string>\",\n    \"dolor_b9\": \"<string>\",\n    \"est_74\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"captureServiceTrackingInfo\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber"
+                      ],
+                      "variable": [
+                        {
+                          "key": "installmentPlanNumber"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-a54f6e72-91bb-4098-8394-82f7a974cf84"
+                },
+                {
+                  "id": "a9bfade1-4d2d-4b66-bc33-db13203952a9",
+                  "name": "Forbidden - merchant has no right to access this resource",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"exercitationf\": \"<string>\",\n    \"commodo_ce\": \"<string>\",\n    \"dolor_b9\": \"<string>\",\n    \"est_74\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"captureServiceTrackingInfo\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber"
+                      ],
+                      "variable": [
+                        {
+                          "key": "installmentPlanNumber"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-a9bfade1-4d2d-4b66-bc33-db13203952a9"
+                },
+                {
+                  "id": "b987f8ae-2a5d-444c-b175-de738609ce62",
+                  "name": "Not Found - resource does not exist",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"exercitationf\": \"<string>\",\n    \"commodo_ce\": \"<string>\",\n    \"dolor_b9\": \"<string>\",\n    \"est_74\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"captureServiceTrackingInfo\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber"
+                      ],
+                      "variable": [
+                        {
+                          "key": "installmentPlanNumber"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-b987f8ae-2a5d-444c-b175-de738609ce62"
+                },
+                {
+                  "id": "1087b33c-aae9-4532-a850-c89208c6ab3b",
+                  "name": "Unprocessable Entity - validation error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"exercitationf\": \"<string>\",\n    \"commodo_ce\": \"<string>\",\n    \"dolor_b9\": \"<string>\",\n    \"est_74\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"captureServiceTrackingInfo\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber"
+                      ],
+                      "variable": [
+                        {
+                          "key": "installmentPlanNumber"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-1087b33c-aae9-4532-a850-c89208c6ab3b"
+                },
+                {
+                  "id": "0c3aa953-8f9a-4330-a6a6-3770115dba36",
+                  "name": "Internal Server Error - unexpected server condition",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"exercitationf\": \"<string>\",\n    \"commodo_ce\": \"<string>\",\n    \"dolor_b9\": \"<string>\",\n    \"est_74\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"captureServiceTrackingInfo\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/:installmentPlanNumber",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        ":installmentPlanNumber"
+                      ],
+                      "variable": [
+                        {
+                          "key": "installmentPlanNumber"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-0c3aa953-8f9a-4330-a6a6-3770115dba36"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-9433d72b-84da-4e4b-9dc2-3922df3643f5"
+            }
+          ],
+          "id": "2613e35c-d791-4016-a5b0-9fdf5f9fd28f",
+          "createdAt": "2026-07-28T02:59:53.000Z",
+          "updatedAt": "2026-07-28T02:59:53.000Z",
+          "uid": "35240-2613e35c-d791-4016-a5b0-9fdf5f9fd28f"
+        },
+        {
+          "name": "search",
+          "item": [
+            {
+              "name": "Fetch Plan(s) by Alternate Field",
+              "id": "c636b853-0637-4039-9e4d-34f294e045d2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"ut_f\": \"<string>\",\n    \"veniam4\": \"<string>\",\n    \"magna_9\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/installmentplans/search",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "installmentplans",
+                    "search"
+                  ]
+                },
+                "description": "Retrieve installment plan(s) using alternate identifiers such as RefOrderNumber or ExtendedParams when the installment plan number is not available."
+              },
+              "response": [
+                {
+                  "id": "d1dc15c7-13ce-4fcb-802a-38649ddec706",
+                  "name": "Installment plan(s) matching search criteria",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"ut_f\": \"<string>\",\n    \"veniam4\": \"<string>\",\n    \"magna_9\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"installmentPlans\": [\n    {\n      \"installmentPlanNumber\": \"<string>\",\n      \"status\": \"<string>\",\n      \"planData\": {\n        \"totalAmount\": {\n          \"value\": \"<float>\",\n          \"currency\": \"<string>\"\n        },\n        \"numberOfInstallments\": \"<integer>\",\n        \"refOrderNumber\": \"<string>\",\n        \"extendedParams\": {\n          \"consequat2\": \"<string>\",\n          \"eu_60\": \"<string>\",\n          \"laboris1\": \"<string>\"\n        },\n        \"firstInstallmentAmount\": {\n          \"value\": \"<float>\",\n          \"currency\": \"<string>\"\n        },\n        \"firstChargeDate\": \"<date>\"\n      },\n      \"consumerData\": {\n        \"fullName\": \"<string>\",\n        \"email\": \"<email>\",\n        \"phoneNumber\": \"<string>\",\n        \"civilId\": \"<string>\",\n        \"billingAddress\": {\n          \"addressLine1\": \"<string>\",\n          \"addressLine2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"country\": \"<string>\",\n          \"zip\": \"<string>\"\n        }\n      },\n      \"installments\": [\n        {\n          \"installmentNumber\": \"<integer>\",\n          \"amount\": {\n            \"value\": \"<float>\",\n            \"currency\": \"<string>\"\n          },\n          \"processDateTime\": \"<dateTime>\",\n          \"status\": \"<string>\"\n        },\n        {\n          \"installmentNumber\": \"<integer>\",\n          \"amount\": {\n            \"value\": \"<float>\",\n            \"currency\": \"<string>\"\n          },\n          \"processDateTime\": \"<dateTime>\",\n          \"status\": \"<string>\"\n        }\n      ],\n      \"errors\": [\n        {\n          \"errorCode\": \"<string>\",\n          \"message\": \"<string>\",\n          \"additionalInfo\": \"<string>\"\n        },\n        {\n          \"errorCode\": \"<string>\",\n          \"message\": \"<string>\",\n          \"additionalInfo\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"installmentPlanNumber\": \"<string>\",\n      \"status\": \"<string>\",\n      \"planData\": {\n        \"totalAmount\": {\n          \"value\": \"<float>\",\n          \"currency\": \"<string>\"\n        },\n        \"numberOfInstallments\": \"<integer>\",\n        \"refOrderNumber\": \"<string>\",\n        \"extendedParams\": {\n          \"exb2f\": \"<string>\"\n        },\n        \"firstInstallmentAmount\": {\n          \"value\": \"<float>\",\n          \"currency\": \"<string>\"\n        },\n        \"firstChargeDate\": \"<date>\"\n      },\n      \"consumerData\": {\n        \"fullName\": \"<string>\",\n        \"email\": \"<email>\",\n        \"phoneNumber\": \"<string>\",\n        \"civilId\": \"<string>\",\n        \"billingAddress\": {\n          \"addressLine1\": \"<string>\",\n          \"addressLine2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"country\": \"<string>\",\n          \"zip\": \"<string>\"\n        }\n      },\n      \"installments\": [\n        {\n          \"installmentNumber\": \"<integer>\",\n          \"amount\": {\n            \"value\": \"<float>\",\n            \"currency\": \"<string>\"\n          },\n          \"processDateTime\": \"<dateTime>\",\n          \"status\": \"<string>\"\n        },\n        {\n          \"installmentNumber\": \"<integer>\",\n          \"amount\": {\n            \"value\": \"<float>\",\n            \"currency\": \"<string>\"\n          },\n          \"processDateTime\": \"<dateTime>\",\n          \"status\": \"<string>\"\n        }\n      ],\n      \"errors\": [\n        {\n          \"errorCode\": \"<string>\",\n          \"message\": \"<string>\",\n          \"additionalInfo\": \"<string>\"\n        },\n        {\n          \"errorCode\": \"<string>\",\n          \"message\": \"<string>\",\n          \"additionalInfo\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-d1dc15c7-13ce-4fcb-802a-38649ddec706"
+                },
+                {
+                  "id": "c4bbf13d-e685-4bb4-8f40-d27e694a7c98",
+                  "name": "Unauthorized - token is not authorized or is expired",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"ut_f\": \"<string>\",\n    \"veniam4\": \"<string>\",\n    \"magna_9\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-c4bbf13d-e685-4bb4-8f40-d27e694a7c98"
+                },
+                {
+                  "id": "6b17d816-22b1-4bac-9f0c-f18646f8f013",
+                  "name": "Forbidden - merchant has no right to access this resource",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"ut_f\": \"<string>\",\n    \"veniam4\": \"<string>\",\n    \"magna_9\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-6b17d816-22b1-4bac-9f0c-f18646f8f013"
+                },
+                {
+                  "id": "e09aabcc-c24f-40b3-90f0-931eecaa6ec4",
+                  "name": "Not Found - resource does not exist",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"ut_f\": \"<string>\",\n    \"veniam4\": \"<string>\",\n    \"magna_9\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-e09aabcc-c24f-40b3-90f0-931eecaa6ec4"
+                },
+                {
+                  "id": "61d5cadf-ce3f-4076-a447-6e08fe35de7e",
+                  "name": "Internal Server Error - unexpected server condition",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"refOrderNumber\": \"<string>\",\n  \"extendedParams\": {\n    \"ut_f\": \"<string>\",\n    \"veniam4\": \"<string>\",\n    \"magna_9\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-61d5cadf-ce3f-4076-a447-6e08fe35de7e"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-c636b853-0637-4039-9e4d-34f294e045d2"
+            }
+          ],
+          "id": "e2011c75-1aa2-4471-9ef4-4ad63dad3f89",
+          "createdAt": "2026-07-28T02:59:53.000Z",
+          "updatedAt": "2026-07-28T02:59:53.000Z",
+          "uid": "35240-e2011c75-1aa2-4471-9ef4-4ad63dad3f89"
+        },
+        {
+          "name": "updatebyalternatefield",
+          "item": [
+            {
+              "name": "Update Plan By Alternate Field",
+              "id": "82757948-f84c-4e39-8574-a11658c83c48",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"reprehenderitbc1\": \"<string>\",\n      \"sint__\": \"<string>\"\n    }\n  },\n  \"updateData\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"ut_\": \"<string>\",\n      \"minim7a4\": \"<string>\",\n      \"sint_8\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"captureServiceTrackingInfo\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/installmentplans/updatebyalternatefield",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "installmentplans",
+                    "updatebyalternatefield"
+                  ]
+                },
+                "description": "Modify installment plan details using alternate identifiers such as RefOrderNumber or ExtendedParams instead of the plan number."
+              },
+              "response": [
+                {
+                  "id": "c2292bab-1b22-417f-b34b-3717f9208e75",
+                  "name": "Installment plan updated successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"identifier\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"reprehenderitbc1\": \"<string>\",\n      \"sint__\": \"<string>\"\n    }\n  },\n  \"updateData\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"ut_\": \"<string>\",\n      \"minim7a4\": \"<string>\",\n      \"sint_8\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"captureServiceTrackingInfo\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/updatebyalternatefield",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "updatebyalternatefield"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"installmentPlanNumber\": \"<string>\",\n  \"status\": \"<string>\",\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"ut_4\": \"<string>\",\n      \"nostrud29\": \"<string>\",\n      \"nisi53c\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"installments\": [\n    {\n      \"installmentNumber\": \"<integer>\",\n      \"amount\": {\n        \"value\": \"<float>\",\n        \"currency\": \"<string>\"\n      },\n      \"processDateTime\": \"<dateTime>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"installmentNumber\": \"<integer>\",\n      \"amount\": {\n        \"value\": \"<float>\",\n        \"currency\": \"<string>\"\n      },\n      \"processDateTime\": \"<dateTime>\",\n      \"status\": \"<string>\"\n    }\n  ],\n  \"errors\": [\n    {\n      \"errorCode\": \"<string>\",\n      \"message\": \"<string>\",\n      \"additionalInfo\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"<string>\",\n      \"message\": \"<string>\",\n      \"additionalInfo\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-c2292bab-1b22-417f-b34b-3717f9208e75"
+                },
+                {
+                  "id": "57cef9cc-5368-4887-8f45-b88d36e3e5fa",
+                  "name": "Unauthorized - token is not authorized or is expired",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"identifier\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"reprehenderitbc1\": \"<string>\",\n      \"sint__\": \"<string>\"\n    }\n  },\n  \"updateData\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"ut_\": \"<string>\",\n      \"minim7a4\": \"<string>\",\n      \"sint_8\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"captureServiceTrackingInfo\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/updatebyalternatefield",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "updatebyalternatefield"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-57cef9cc-5368-4887-8f45-b88d36e3e5fa"
+                },
+                {
+                  "id": "d29c97e7-9347-4a5e-a7f1-71216ace8136",
+                  "name": "Forbidden - merchant has no right to access this resource",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"identifier\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"reprehenderitbc1\": \"<string>\",\n      \"sint__\": \"<string>\"\n    }\n  },\n  \"updateData\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"ut_\": \"<string>\",\n      \"minim7a4\": \"<string>\",\n      \"sint_8\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"captureServiceTrackingInfo\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/updatebyalternatefield",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "updatebyalternatefield"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-d29c97e7-9347-4a5e-a7f1-71216ace8136"
+                },
+                {
+                  "id": "16eaa8d5-ea96-4a4f-a786-8d74027911dd",
+                  "name": "Not Found - resource does not exist",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"identifier\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"reprehenderitbc1\": \"<string>\",\n      \"sint__\": \"<string>\"\n    }\n  },\n  \"updateData\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"ut_\": \"<string>\",\n      \"minim7a4\": \"<string>\",\n      \"sint_8\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"captureServiceTrackingInfo\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/updatebyalternatefield",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "updatebyalternatefield"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-16eaa8d5-ea96-4a4f-a786-8d74027911dd"
+                },
+                {
+                  "id": "91ea6b55-ec0d-4223-9d8a-0a1c1fa573b4",
+                  "name": "Unprocessable Entity - validation error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"identifier\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"reprehenderitbc1\": \"<string>\",\n      \"sint__\": \"<string>\"\n    }\n  },\n  \"updateData\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"ut_\": \"<string>\",\n      \"minim7a4\": \"<string>\",\n      \"sint_8\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"captureServiceTrackingInfo\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/updatebyalternatefield",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "updatebyalternatefield"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-91ea6b55-ec0d-4223-9d8a-0a1c1fa573b4"
+                },
+                {
+                  "id": "b5b3b3f2-46fe-4692-aea6-5ce7f418ee90",
+                  "name": "Internal Server Error - unexpected server condition",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"identifier\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"reprehenderitbc1\": \"<string>\",\n      \"sint__\": \"<string>\"\n    }\n  },\n  \"updateData\": {\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"ut_\": \"<string>\",\n      \"minim7a4\": \"<string>\",\n      \"sint_8\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"captureServiceTrackingInfo\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/installmentplans/updatebyalternatefield",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "installmentplans",
+                        "updatebyalternatefield"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:59:53.000Z",
+                  "updatedAt": "2026-07-28T02:59:53.000Z",
+                  "uid": "35240-b5b3b3f2-46fe-4692-aea6-5ce7f418ee90"
+                }
+              ],
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-82757948-f84c-4e39-8574-a11658c83c48"
+            }
+          ],
+          "id": "e950c216-1c6c-495d-bfed-e058248e6914",
+          "createdAt": "2026-07-28T02:59:53.000Z",
+          "updatedAt": "2026-07-28T02:59:53.000Z",
+          "uid": "35240-e950c216-1c6c-495d-bfed-e058248e6914"
+        },
+        {
+          "name": "Create Installment Plan",
+          "id": "1085099f-0127-4fda-bcf3-44fb1902c684",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"Ut_e\": \"<string>\",\n      \"consectetur_f\": \"<string>\",\n      \"ullamco_4\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"creditCardDetails\": {\n    \"cardNumber\": \"<string>\",\n    \"cardExpYear\": \"<integer>\",\n    \"cardExpMonth\": \"<integer>\",\n    \"cardCvv\": \"<string>\",\n    \"cardHolderFullName\": \"<string>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"redirectUrls\": {\n    \"succeeded\": \"<uri>\",\n    \"failed\": \"<uri>\",\n    \"cancelled\": \"<uri>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/installmentplans",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "installmentplans"
+              ]
+            },
+            "description": "Establish an installment plan with immediate authorization. This is the primary endpoint for merchants using direct API integration with full PCI DSS compliance. The plan is created and authorized in a single call. Requires SAQ-D certification."
+          },
+          "response": [
+            {
+              "id": "3e476677-a6bb-4549-b4c5-1511502fa47f",
+              "name": "Installment plan created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"Ut_e\": \"<string>\",\n      \"consectetur_f\": \"<string>\",\n      \"ullamco_4\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"creditCardDetails\": {\n    \"cardNumber\": \"<string>\",\n    \"cardExpYear\": \"<integer>\",\n    \"cardExpMonth\": \"<integer>\",\n    \"cardCvv\": \"<string>\",\n    \"cardHolderFullName\": \"<string>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"redirectUrls\": {\n    \"succeeded\": \"<uri>\",\n    \"failed\": \"<uri>\",\n    \"cancelled\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/installmentplans",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "installmentplans"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"installmentPlanNumber\": \"<string>\",\n  \"status\": \"<string>\",\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"ut_4\": \"<string>\",\n      \"nostrud29\": \"<string>\",\n      \"nisi53c\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"installments\": [\n    {\n      \"installmentNumber\": \"<integer>\",\n      \"amount\": {\n        \"value\": \"<float>\",\n        \"currency\": \"<string>\"\n      },\n      \"processDateTime\": \"<dateTime>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"installmentNumber\": \"<integer>\",\n      \"amount\": {\n        \"value\": \"<float>\",\n        \"currency\": \"<string>\"\n      },\n      \"processDateTime\": \"<dateTime>\",\n      \"status\": \"<string>\"\n    }\n  ],\n  \"errors\": [\n    {\n      \"errorCode\": \"<string>\",\n      \"message\": \"<string>\",\n      \"additionalInfo\": \"<string>\"\n    },\n    {\n      \"errorCode\": \"<string>\",\n      \"message\": \"<string>\",\n      \"additionalInfo\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-3e476677-a6bb-4549-b4c5-1511502fa47f"
+            },
+            {
+              "id": "2fb85d6c-33f7-490f-ad3a-09f5e0e30abc",
+              "name": "Unauthorized - token is not authorized or is expired",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"Ut_e\": \"<string>\",\n      \"consectetur_f\": \"<string>\",\n      \"ullamco_4\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"creditCardDetails\": {\n    \"cardNumber\": \"<string>\",\n    \"cardExpYear\": \"<integer>\",\n    \"cardExpMonth\": \"<integer>\",\n    \"cardCvv\": \"<string>\",\n    \"cardHolderFullName\": \"<string>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"redirectUrls\": {\n    \"succeeded\": \"<uri>\",\n    \"failed\": \"<uri>\",\n    \"cancelled\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/installmentplans",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "installmentplans"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-2fb85d6c-33f7-490f-ad3a-09f5e0e30abc"
+            },
+            {
+              "id": "d08dff98-2a29-40b9-b26b-434e9ba51c42",
+              "name": "Forbidden - merchant has no right to access this resource",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"Ut_e\": \"<string>\",\n      \"consectetur_f\": \"<string>\",\n      \"ullamco_4\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"creditCardDetails\": {\n    \"cardNumber\": \"<string>\",\n    \"cardExpYear\": \"<integer>\",\n    \"cardExpMonth\": \"<integer>\",\n    \"cardCvv\": \"<string>\",\n    \"cardHolderFullName\": \"<string>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"redirectUrls\": {\n    \"succeeded\": \"<uri>\",\n    \"failed\": \"<uri>\",\n    \"cancelled\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/installmentplans",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "installmentplans"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-d08dff98-2a29-40b9-b26b-434e9ba51c42"
+            },
+            {
+              "id": "c249c86d-c744-4652-aafe-a6d476a8c7d4",
+              "name": "Unprocessable Entity - validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"Ut_e\": \"<string>\",\n      \"consectetur_f\": \"<string>\",\n      \"ullamco_4\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"creditCardDetails\": {\n    \"cardNumber\": \"<string>\",\n    \"cardExpYear\": \"<integer>\",\n    \"cardExpMonth\": \"<integer>\",\n    \"cardCvv\": \"<string>\",\n    \"cardHolderFullName\": \"<string>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"redirectUrls\": {\n    \"succeeded\": \"<uri>\",\n    \"failed\": \"<uri>\",\n    \"cancelled\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/installmentplans",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "installmentplans"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-c249c86d-c744-4652-aafe-a6d476a8c7d4"
+            },
+            {
+              "id": "ca0c59e5-0666-45d8-aa3b-b340e2d5adfc",
+              "name": "Internal Server Error - unexpected server condition",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"Ut_e\": \"<string>\",\n      \"consectetur_f\": \"<string>\",\n      \"ullamco_4\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"creditCardDetails\": {\n    \"cardNumber\": \"<string>\",\n    \"cardExpYear\": \"<integer>\",\n    \"cardExpMonth\": \"<integer>\",\n    \"cardCvv\": \"<string>\",\n    \"cardHolderFullName\": \"<string>\"\n  },\n  \"consumerData\": {\n    \"fullName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"civilId\": \"<string>\",\n    \"billingAddress\": {\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\"\n    }\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"redirectUrls\": {\n    \"succeeded\": \"<uri>\",\n    \"failed\": \"<uri>\",\n    \"cancelled\": \"<uri>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/installmentplans",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "installmentplans"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"message\": \"<string>\",\n  \"additionalInfo\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:59:53.000Z",
+              "updatedAt": "2026-07-28T02:59:53.000Z",
+              "uid": "35240-ca0c59e5-0666-45d8-aa3b-b340e2d5adfc"
+            }
+          ],
+          "createdAt": "2026-07-28T02:59:53.000Z",
+          "updatedAt": "2026-07-28T02:59:53.000Z",
+          "uid": "35240-1085099f-0127-4fda-bcf3-44fb1902c684"
+        }
+      ],
+      "id": "b0c11a13-898d-4e1a-8d3e-1f7a7ab3fb36",
+      "createdAt": "2026-07-28T02:59:53.000Z",
+      "updatedAt": "2026-07-28T02:59:53.000Z",
+      "uid": "35240-b0c11a13-898d-4e1a-8d3e-1f7a7ab3fb36"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://webapi.production.splitit.com"
+    }
+  ]
+}
