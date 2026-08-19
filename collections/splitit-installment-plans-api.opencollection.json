@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Splitit Account Management System Authentication Installment Plans API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Installment Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Installment Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://webapi.production.splitit.com/installmentplans",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Establish an installment plan with immediate authorization. This is the primary endpoint for merchants using direct API integration with full PCI DSS compliance. The plan is created and authorized in a single call. Requires SAQ-D certification."
+        },
+        {
+          "info": {
+            "name": "Initiate Installment Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://webapi.production.splitit.com/installmentplans/initiate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Establish an installment plan without finalizing it. Designed for use with Splitit's pre-built checkout solutions (Payment Form, Flex Form). Requires only SAQ-A certification. Multiple calls for the same plan update existing data."
+        },
+        {
+          "info": {
+            "name": "Verify Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://webapi.production.splitit.com/installmentplans/:installmentPlanNumber/verifyauthorization",
+            "params": [
+              {
+                "name": "installmentPlanNumber",
+                "value": "",
+                "type": "path",
+                "description": "The unique installment plan number returned from initiate"
+              }
+            ]
+          },
+          "docs": "Confirm authorization of an installment plan when authorization and order closure do not occur simultaneously. Used after Payment Form, Flex Form checkout, or 3DS redirection to verify the plan has been properly authorized before fulfilling the order."
+        },
+        {
+          "info": {
+            "name": "Fetch Plan by Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://webapi.production.splitit.com/installmentplans/:installmentPlanNumber",
+            "params": [
+              {
+                "name": "installmentPlanNumber",
+                "value": "",
+                "type": "path",
+                "description": "The unique installment plan number"
+              }
+            ]
+          },
+          "docs": "Retrieve the details of an installment plan using the plan number."
+        },
+        {
+          "info": {
+            "name": "Update Plan by Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://webapi.production.splitit.com/installmentplans/:installmentPlanNumber",
+            "params": [
+              {
+                "name": "installmentPlanNumber",
+                "value": "",
+                "type": "path",
+                "description": "The unique installment plan number"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify installment plan details after authorization. Use to update order details, shipping information, or other plan attributes post-authorization."
+        },
+        {
+          "info": {
+            "name": "Fetch Plan(s) by Alternate Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://webapi.production.splitit.com/installmentplans/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve installment plan(s) using alternate identifiers such as RefOrderNumber or ExtendedParams when the installment plan number is not available."
+        },
+        {
+          "info": {
+            "name": "Update Plan By Alternate Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://webapi.production.splitit.com/installmentplans/updatebyalternatefield",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify installment plan details using alternate identifiers such as RefOrderNumber or ExtendedParams instead of the plan number."
+        },
+        {
+          "info": {
+            "name": "Refund a Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://webapi.production.splitit.com/installmentplans/:installmentPlanNumber/refund",
+            "params": [
+              {
+                "name": "installmentPlanNumber",
+                "value": "",
+                "type": "path",
+                "description": "The unique installment plan number"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a partial or complete refund for an installment plan. Supports both full refunds and partial refunds for installment transactions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,395 @@
+{
+  "item": [
+    {
+      "id": "deee1166-d927-4aa8-8dea-300cfc1f23fe",
+      "name": "Eligibility",
+      "description": {
+        "content": "Check shopper eligibility for installment plans",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fca42bb9-cd6b-47d6-a69b-0132aaee6a10",
+          "name": "Check Eligibility",
+          "request": {
+            "name": "Check Eligibility",
+            "description": {
+              "content": "Verify a shopper's overall eligibility for Splitit installment plans and determine which plans they are eligible for. Use this endpoint before initiating a plan to confirm availability.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "check-eligibility"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"numberOfInstallments\": \"<integer>\",\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9bcd391c-e7cd-4c6c-991b-64d9ffc48b1d",
+              "name": "Eligibility check result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check-eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"USD\"\n    },\n    \"numberOfInstallments\": 3,\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"key_0\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"USD\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"US\",\n    \"zip\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isEligible\": false,\n  \"eligiblePlans\": [\n    {\n      \"numberOfInstallments\": 8104,\n      \"installmentAmount\": {\n        \"value\": \"<float>\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"numberOfInstallments\": 612,\n      \"installmentAmount\": {\n        \"value\": \"<float>\",\n        \"currency\": \"USD\"\n      }\n    }\n  ],\n  \"errors\": [\n    {\n      \"errorCode\": \"string\",\n      \"message\": \"string\",\n      \"additionalInfo\": \"string\"\n    },\n    {\n      \"errorCode\": \"string\",\n      \"message\": \"string\",\n      \"additionalInfo\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85c1c374-1ecb-4eb6-b2d6-47ebb9fb34b1",
+              "name": "Unauthorized - token is not authorized or is expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check-eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"USD\"\n    },\n    \"numberOfInstallments\": 3,\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"key_0\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"USD\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"US\",\n    \"zip\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"additionalInfo\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "453ca70e-b548-4b18-ab7b-ccf4075dae55",
+              "name": "Forbidden - merchant has no right to access this resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check-eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"USD\"\n    },\n    \"numberOfInstallments\": 3,\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"key_0\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"USD\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"US\",\n    \"zip\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"additionalInfo\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f3f615f-e060-4980-9d58-712fafd0c0ab",
+              "name": "Not Found - resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check-eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"USD\"\n    },\n    \"numberOfInstallments\": 3,\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"key_0\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"USD\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"US\",\n    \"zip\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"additionalInfo\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "253cd265-a51e-41a2-ada2-145681bf865b",
+              "name": "Unprocessable Entity - validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check-eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"USD\"\n    },\n    \"numberOfInstallments\": 3,\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"key_0\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"USD\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"US\",\n    \"zip\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"additionalInfo\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e07fc3c9-3080-4b07-9523-d70b56f171ad",
+              "name": "Internal Server Error - unexpected server condition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check-eligibility"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planData\": {\n    \"totalAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"USD\"\n    },\n    \"numberOfInstallments\": 3,\n    \"refOrderNumber\": \"<string>\",\n    \"extendedParams\": {\n      \"key_0\": \"<string>\"\n    },\n    \"firstInstallmentAmount\": {\n      \"value\": \"<float>\",\n      \"currency\": \"USD\"\n    },\n    \"firstChargeDate\": \"<date>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"US\",\n    \"zip\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"additionalInfo\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://webapi.production.splitit.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3731a356-b3c0-421a-b30d-42581f991db4",
+    "name": "Splitit Account Management System Authentication Eligibility API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for onboarding and managing sub-merchants on the Splitit platform. Enables payment facilitators and marketplace operators to add merchant partners, upload compliance documents, send onboarding invitations, monitor approval status, retrieve pending accounts, and generate time-limited secure login links for merchant portal access.\n\nContact Support:\n Name: Splitit Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

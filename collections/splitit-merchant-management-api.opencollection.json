@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Splitit Account Management System Authentication Merchant Management API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchant Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Structure for Add Merchant Partner Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://webapi.production.splitit.com/api/ams/structure"
+          },
+          "docs": "Retrieve the required fields and structure for creating merchant partner requests. Use this endpoint to understand required and optional fields before calling Add Merchant Partner."
+        },
+        {
+          "info": {
+            "name": "Add Merchant Partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://webapi.production.splitit.com/api/ams/merchants",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Onboard a new sub-merchant partner to the Splitit platform. Provides required business and compliance information for the new merchant. Payment facilitators and marketplace operators use this endpoint to expand their merchant network on Splitit."
+        },
+        {
+          "info": {
+            "name": "Upload Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://webapi.production.splitit.com/api/ams/merchants/:merchantId/documents",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "path",
+                "description": "The merchant partner identifier"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "documentType",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submit agreements and compliance documentation for a merchant partner. Supports uploading required KYC/KYB documents and agreements needed for Splitit onboarding approval."
+        },
+        {
+          "info": {
+            "name": "Send Invite Emails",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://webapi.production.splitit.com/api/ams/merchants/:merchantId/invite",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "path",
+                "description": "The merchant partner identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Distribute prefilled onboarding forms to merchant partners via email. The invite email contains a link to a prefilled application form that the merchant can complete to finalize their Splitit onboarding."
+        },
+        {
+          "info": {
+            "name": "Get Onboarding Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://webapi.production.splitit.com/api/ams/merchants/:merchantId/status",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "path",
+                "description": "The merchant partner identifier"
+              }
+            ]
+          },
+          "docs": "Check the approval progress of a merchant partner account. Returns the current onboarding status including any pending items or required actions."
+        },
+        {
+          "info": {
+            "name": "Get Pending Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://webapi.production.splitit.com/api/ams/merchants/pending"
+          },
+          "docs": "Retrieve all merchant accounts that are still pending Splitit approval. Use this endpoint to monitor the onboarding pipeline and follow up with merchants who have not yet completed the process."
+        },
+        {
+          "info": {
+            "name": "Generate Direct Login Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://webapi.production.splitit.com/api/ams/merchants/:merchantId/login-link",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "path",
+                "description": "The merchant partner identifier"
+              }
+            ]
+          },
+          "docs": "Create a secure, time-limited portal access link for a merchant partner without requiring credentials. The generated link provides direct access to the Splitit Merchant Hub for the specified merchant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
