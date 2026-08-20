@@ -33,6 +33,13 @@ tags:
   - Buy Now Pay Later
   - Credit Card
   - Fintech
+  - E-Commerce
+tags_raw:
+  - Payments
+  - Installments
+  - Buy Now Pay Later
+  - Credit Card
+  - Fintech
   - E-commerce
 apis:
 - name: Splitit Installments API v4
