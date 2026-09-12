@@ -228,6 +228,8 @@ apis:
   - type: Authentication
     url: https://developers.splitit.com/api/v3/authenticate/
 common:
+  - type: Website
+    url: https://www.splitit.com/
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/splitit/overview
   - type: AgenticAccess
