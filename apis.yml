@@ -44,7 +44,7 @@ tags:
   - Payments
   - Installments
   - Buy Now Pay Later
-  - Credit Card
+  - Credit Cards
   - Fintech
   - E-Commerce
 tags_raw:
@@ -63,6 +63,10 @@ apis:
   humanURL: https://developers.splitit.com/apis/
   baseURL: https://webapi.production.splitit.com
   tags:
+  - Installments
+  - Payments
+  - Credit Cards
+  tags_raw:
   - Installments
   - Payments
   - Credit Card
@@ -99,6 +103,10 @@ apis:
   humanURL: https://developers.splitit.com/apis/
   baseURL: https://webapi.production.splitit.com
   tags:
+  - Reporting
+  - Merchants
+  - Analytics
+  tags_raw:
   - Reporting
   - Merchant
   - Analytics
@@ -153,6 +161,11 @@ apis:
   humanURL: https://developers.splitit.com/apis/
   baseURL: https://webapi.production.splitit.com
   tags:
+  - SMS
+  - Text-to-Pay
+  - QR Codes
+  - Payments
+  tags_raw:
   - SMS
   - Text-to-Pay
   - QR Code
