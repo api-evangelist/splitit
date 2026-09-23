@@ -1,11 +1,12 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Splitit Account Management System Authentication Installment Plans API
-  description: API for onboarding and managing sub-merchants on the Splitit platform. Enables payment facilitators and marketplace operators to add merchant partners, upload compliance documents, send onboarding invitations, monitor approval status, retrieve pending accounts, and generate time-limited secure login links for merchant portal access.
-  version: '1.0'
+  title: Splitit Installments API v3 Installment Plans API
+  description: The primary REST API for creating and managing credit card installment plans.
+  version: '3.0'
   contact:
     name: Splitit Developer Support
     url: https://developers.splitit.com/
+  termsOfService: https://www.splitit.com/legal/
   license:
     name: Proprietary
 servers:
@@ -267,7 +268,69 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  responses:
+    NotFound:
+      description: Not Found - resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - token is not authorized or is expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable Entity - validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal Server Error - unexpected server condition
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden - merchant has no right to access this resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    UXSettings:
+      type: object
+      properties:
+        returnUrl:
+          type: string
+          format: uri
+          description: Return URL after checkout completion
+    InitiateInstallmentPlanRequest:
+      type: object
+      required:
+      - planData
+      properties:
+        planData:
+          $ref: '#/components/schemas/PlanData'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
+        consumerData:
+          $ref: '#/components/schemas/ConsumerData'
+        redirectUrls:
+          $ref: '#/components/schemas/RedirectUrls'
+        ux:
+          $ref: '#/components/schemas/UXSettings'
+    SearchInstallmentPlanResponse:
+      type: object
+      properties:
+        installmentPlans:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallmentPlanResponse'
+        totalCount:
+          type: integer
     UpdateInstallmentPlanRequest:
       type: object
       properties:
@@ -284,6 +347,37 @@ components:
         captureServiceTrackingInfo:
           type: string
           description: Tracking information for shipped orders
+    InitiateInstallmentPlanResponse:
+      type: object
+      properties:
+        installmentPlanNumber:
+          type: string
+          description: Unique identifier for the installment plan
+        checkoutUrl:
+          type: string
+          format: uri
+          description: URL to redirect the shopper to complete checkout
+        status:
+          type: string
+          description: Current status of the plan
+    ConsumerData:
+      type: object
+      properties:
+        fullName:
+          type: string
+          description: Shopper's full name
+        email:
+          type: string
+          format: email
+          description: Shopper's email address
+        phoneNumber:
+          type: string
+          description: Shopper's phone number
+        civilId:
+          type: string
+          description: National identification number if applicable
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
     CreateInstallmentPlanRequest:
       type: object
       required:
@@ -301,62 +395,108 @@ components:
           $ref: '#/components/schemas/ConsumerData'
         redirectUrls:
           $ref: '#/components/schemas/RedirectUrls'
-    RedirectUrls:
-      type: object
-      properties:
-        succeeded:
-          type: string
-          format: uri
-          description: URL to redirect to on successful payment
-        failed:
-          type: string
-          format: uri
-          description: URL to redirect to on payment failure
-        cancelled:
-          type: string
-          format: uri
-          description: URL to redirect to if the shopper cancels
-    Installment:
-      type: object
-      properties:
-        installmentNumber:
-          type: integer
-          description: Sequential installment number
-        amount:
-          $ref: '#/components/schemas/Money'
-        processDateTime:
-          type: string
-          format: date-time
-          description: Scheduled or actual processing date/time
-        status:
-          type: string
-          description: Status of this installment
-    InitiateInstallmentPlanRequest:
+    UpdateByAlternateFieldRequest:
       type: object
       required:
-      - planData
+      - identifier
       properties:
-        planData:
-          $ref: '#/components/schemas/PlanData'
-        billingAddress:
-          $ref: '#/components/schemas/BillingAddress'
-        consumerData:
-          $ref: '#/components/schemas/ConsumerData'
-        redirectUrls:
-          $ref: '#/components/schemas/RedirectUrls'
-        ux:
-          $ref: '#/components/schemas/UXSettings'
-    Money:
+        identifier:
+          type: object
+          properties:
+            refOrderNumber:
+              type: string
+              description: Merchant reference order number to identify the plan
+            extendedParams:
+              type: object
+              additionalProperties:
+                type: string
+        updateData:
+          $ref: '#/components/schemas/UpdateInstallmentPlanRequest'
+    RefundRequest:
+      type: object
+      required:
+      - amount
+      properties:
+        amount:
+          $ref: '#/components/schemas/Money'
+        refundStrategy:
+          type: string
+          enum:
+          - FutureInstallmentsFirst
+          - FutureInstallmentsLast
+          - FutureInstallmentsLast_PaidFirstInstallmentsFirst
+          description: Strategy for applying partial refunds against installments
+    RefundResponse:
       type: object
       properties:
-        value:
-          type: number
-          format: float
-          description: Monetary amount
-        currency:
+        refundId:
           type: string
-          description: ISO 4217 currency code
-          example: USD
+          description: Unique identifier for the refund
+        installmentPlanNumber:
+          type: string
+          description: The plan that was refunded
+        refundedAmount:
+          $ref: '#/components/schemas/Money'
+        status:
+          type: string
+          description: Status of the refund
+    VerifyAuthorizationResponse:
+      type: object
+      properties:
+        isPlanApproved:
+          type: boolean
+          description: Whether the installment plan has been approved
+        installmentPlanNumber:
+          type: string
+          description: The plan number being verified
+        status:
+          type: string
+          description: Authorization status
+    BillingAddress:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+          description: Street address line 1
+        addressLine2:
+          type: string
+          description: Street address line 2
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State or province code
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: US
+        zip:
+          type: string
+          description: Postal/ZIP code
+    SearchInstallmentPlanRequest:
+      type: object
+      properties:
+        refOrderNumber:
+          type: string
+          description: Merchant reference order number
+        extendedParams:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs to match against
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Splitit error code (e.g., 400-542, 400-563)
+        message:
+          type: string
+          description: Human-readable error description
+        additionalInfo:
+          type: string
+          description: Additional context about the error
     PlanData:
       type: object
       properties:
@@ -380,100 +520,6 @@ components:
           type: string
           format: date
           description: Date of the first installment charge
-    InitiateInstallmentPlanResponse:
-      type: object
-      properties:
-        installmentPlanNumber:
-          type: string
-          description: Unique identifier for the installment plan
-        checkoutUrl:
-          type: string
-          format: uri
-          description: URL to redirect the shopper to complete checkout
-        status:
-          type: string
-          description: Current status of the plan
-    UXSettings:
-      type: object
-      properties:
-        returnUrl:
-          type: string
-          format: uri
-          description: Return URL after checkout completion
-    RefundResponse:
-      type: object
-      properties:
-        refundId:
-          type: string
-          description: Unique identifier for the refund
-        installmentPlanNumber:
-          type: string
-          description: The plan that was refunded
-        refundedAmount:
-          $ref: '#/components/schemas/Money'
-        status:
-          type: string
-          description: Status of the refund
-    BillingAddress:
-      type: object
-      properties:
-        addressLine1:
-          type: string
-          description: Street address line 1
-        addressLine2:
-          type: string
-          description: Street address line 2
-        city:
-          type: string
-          description: City
-        state:
-          type: string
-          description: State or province code
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-          example: US
-        zip:
-          type: string
-          description: Postal/ZIP code
-    VerifyAuthorizationResponse:
-      type: object
-      properties:
-        isPlanApproved:
-          type: boolean
-          description: Whether the installment plan has been approved
-        installmentPlanNumber:
-          type: string
-          description: The plan number being verified
-        status:
-          type: string
-          description: Authorization status
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: Splitit error code (e.g., 400-542, 400-563)
-        message:
-          type: string
-          description: Human-readable error description
-        additionalInfo:
-          type: string
-          description: Additional context about the error
-    RefundRequest:
-      type: object
-      required:
-      - amount
-      properties:
-        amount:
-          $ref: '#/components/schemas/Money'
-        refundStrategy:
-          type: string
-          enum:
-          - FutureInstallmentsFirst
-          - FutureInstallmentsLast
-          - FutureInstallmentsLast_PaidFirstInstallmentsFirst
-          description: Strategy for applying partial refunds against installments
     CreditCardDetails:
       type: object
       properties:
@@ -492,61 +538,47 @@ components:
         cardHolderFullName:
           type: string
           description: Name as it appears on the card
-    SearchInstallmentPlanResponse:
+    Money:
       type: object
       properties:
-        installmentPlans:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstallmentPlanResponse'
-        totalCount:
+        value:
+          type: number
+          format: float
+          description: Monetary amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
+    Installment:
+      type: object
+      properties:
+        installmentNumber:
           type: integer
-    ConsumerData:
+          description: Sequential installment number
+        amount:
+          $ref: '#/components/schemas/Money'
+        processDateTime:
+          type: string
+          format: date-time
+          description: Scheduled or actual processing date/time
+        status:
+          type: string
+          description: Status of this installment
+    RedirectUrls:
       type: object
       properties:
-        fullName:
+        succeeded:
           type: string
-          description: Shopper's full name
-        email:
+          format: uri
+          description: URL to redirect to on successful payment
+        failed:
           type: string
-          format: email
-          description: Shopper's email address
-        phoneNumber:
+          format: uri
+          description: URL to redirect to on payment failure
+        cancelled:
           type: string
-          description: Shopper's phone number
-        civilId:
-          type: string
-          description: National identification number if applicable
-        billingAddress:
-          $ref: '#/components/schemas/BillingAddress'
-    UpdateByAlternateFieldRequest:
-      type: object
-      required:
-      - identifier
-      properties:
-        identifier:
-          type: object
-          properties:
-            refOrderNumber:
-              type: string
-              description: Merchant reference order number to identify the plan
-            extendedParams:
-              type: object
-              additionalProperties:
-                type: string
-        updateData:
-          $ref: '#/components/schemas/UpdateInstallmentPlanRequest'
-    SearchInstallmentPlanRequest:
-      type: object
-      properties:
-        refOrderNumber:
-          type: string
-          description: Merchant reference order number
-        extendedParams:
-          type: object
-          additionalProperties:
-            type: string
-          description: Key-value pairs to match against
+          format: uri
+          description: URL to redirect to if the shopper cancels
     InstallmentPlanResponse:
       type: object
       properties:
@@ -568,39 +600,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ErrorResponse'
-  responses:
-    Forbidden:
-      description: Forbidden - merchant has no right to access this resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - token is not authorized or is expired
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not Found - resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal Server Error - unexpected server condition
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable Entity - validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+      description: Bearer token obtained from the Splitit Identity Server

@@ -1,20 +1,29 @@
 {
   "provider": "splitit",
   "sources": [
-    "splitit-authentication-api-openapi.yml",
-    "splitit-eligibility-api-openapi.yml",
-    "splitit-installment-plans-api-openapi.yml",
-    "splitit-merchant-management-api-openapi.yml"
+    "_original/splitit-account-management-api.yml",
+    "_original/splitit-installments-api-v3.yml"
   ],
   "outputs": [
     "splitit-authentication-api-openapi.yml",
+    "splitit-merchant-management-api-openapi.yml",
     "splitit-eligibility-api-openapi.yml",
-    "splitit-installment-plans-api-openapi.yml",
-    "splitit-merchant-management-api-openapi.yml"
+    "splitit-installment-plans-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "splitit-account-management-api.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "splitit-installments-api-v3.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'Authentication' spans 2 source specs (splitit-account-management-api.yml, splitit-installments-api-v3.yml): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "splitit-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "splitit-eligibility-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "splitit-installment-plans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "splitit-merchant-management-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

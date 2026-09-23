@@ -1,11 +1,12 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Splitit Account Management System Authentication Eligibility API
-  description: API for onboarding and managing sub-merchants on the Splitit platform. Enables payment facilitators and marketplace operators to add merchant partners, upload compliance documents, send onboarding invitations, monitor approval status, retrieve pending accounts, and generate time-limited secure login links for merchant portal access.
-  version: '1.0'
+  title: Splitit Installments API v3 Eligibility API
+  description: The primary REST API for creating and managing credit card installment plans.
+  version: '3.0'
   contact:
     name: Splitit Developer Support
     url: https://developers.splitit.com/
+  termsOfService: https://www.splitit.com/legal/
   license:
     name: Proprietary
 servers:
@@ -50,26 +51,38 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  schemas:
-    CheckEligibilityResponse:
-      type: object
-      properties:
-        isEligible:
-          type: boolean
-          description: Whether the shopper is eligible for installment plans
-        eligiblePlans:
-          type: array
-          items:
-            type: object
-            properties:
-              numberOfInstallments:
-                type: integer
-              installmentAmount:
-                $ref: '#/components/schemas/Money'
-        errors:
-          type: array
-          items:
+  responses:
+    NotFound:
+      description: Not Found - resource does not exist
+      content:
+        application/json:
+          schema:
             $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - token is not authorized or is expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal Server Error - unexpected server condition
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden - merchant has no right to access this resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable Entity - validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
     ErrorResponse:
       type: object
       properties:
@@ -82,17 +95,6 @@ components:
         additionalInfo:
           type: string
           description: Additional context about the error
-    Money:
-      type: object
-      properties:
-        value:
-          type: number
-          format: float
-          description: Monetary amount
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          example: USD
     PlanData:
       type: object
       properties:
@@ -125,6 +127,17 @@ components:
           $ref: '#/components/schemas/PlanData'
         billingAddress:
           $ref: '#/components/schemas/BillingAddress'
+    Money:
+      type: object
+      properties:
+        value:
+          type: number
+          format: float
+          description: Monetary amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
     BillingAddress:
       type: object
       properties:
@@ -147,39 +160,28 @@ components:
         zip:
           type: string
           description: Postal/ZIP code
-  responses:
-    InternalServerError:
-      description: Internal Server Error - unexpected server condition
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - token is not authorized or is expired
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not Found - resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Forbidden - merchant has no right to access this resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable Entity - validation error
-      content:
-        application/json:
-          schema:
+    CheckEligibilityResponse:
+      type: object
+      properties:
+        isEligible:
+          type: boolean
+          description: Whether the shopper is eligible for installment plans
+        eligiblePlans:
+          type: array
+          items:
+            type: object
+            properties:
+              numberOfInstallments:
+                type: integer
+              installmentAmount:
+                $ref: '#/components/schemas/Money'
+        errors:
+          type: array
+          items:
             $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+      description: Bearer token obtained from the Splitit Identity Server
