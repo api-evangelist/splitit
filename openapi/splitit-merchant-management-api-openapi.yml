@@ -221,6 +221,60 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    InviteEmailResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        email:
+          type: string
+          format: email
+        sentAt:
+          type: string
+          format: date-time
+    PendingAccountsResponse:
+      type: object
+      properties:
+        merchants:
+          type: array
+          items:
+            $ref: '#/components/schemas/MerchantPartnerResponse'
+        totalCount:
+          type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+    MerchantStructureResponse:
+      type: object
+      properties:
+        requiredFields:
+          type: array
+          items:
+            type: object
+            properties:
+              fieldName:
+                type: string
+              fieldType:
+                type: string
+              isRequired:
+                type: boolean
+              description:
+                type: string
+    LoginLinkResponse:
+      type: object
+      properties:
+        loginUrl:
+          type: string
+          format: uri
+          description: Time-limited secure login URL for the merchant portal
+        expiresAt:
+          type: string
+          format: date-time
+          description: Expiration time of the login link
     OnboardingStatusResponse:
       type: object
       properties:
@@ -242,40 +296,52 @@ components:
         updatedAt:
           type: string
           format: date-time
-    MerchantStructureResponse:
+    Address:
       type: object
       properties:
-        requiredFields:
-          type: array
-          items:
-            type: object
-            properties:
-              fieldName:
-                type: string
-              fieldType:
-                type: string
-              isRequired:
-                type: boolean
-              description:
-                type: string
-    ErrorResponse:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+          example: US
+        zip:
+          type: string
+    MerchantPartnerResponse:
       type: object
       properties:
-        errorCode:
+        merchantId:
           type: string
-        message:
+          description: Unique identifier assigned to the new merchant
+        status:
           type: string
-    LoginLinkResponse:
-      type: object
-      properties:
-        loginUrl:
+          description: Initial onboarding status
+        businessName:
           type: string
-          format: uri
-          description: Time-limited secure login URL for the merchant portal
-        expiresAt:
+        email:
+          type: string
+          format: email
+        createdAt:
           type: string
           format: date-time
-          description: Expiration time of the login link
+    DocumentUploadResponse:
+      type: object
+      properties:
+        documentId:
+          type: string
+          description: Unique identifier for the uploaded document
+        documentType:
+          type: string
+        uploadedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
     AddMerchantPartnerRequest:
       type: object
       required:
@@ -307,75 +373,9 @@ components:
         contactName:
           type: string
           description: Name of the primary contact person
-    DocumentUploadResponse:
-      type: object
-      properties:
-        documentId:
-          type: string
-          description: Unique identifier for the uploaded document
-        documentType:
-          type: string
-        uploadedAt:
-          type: string
-          format: date-time
-        status:
-          type: string
-    PendingAccountsResponse:
-      type: object
-      properties:
-        merchants:
-          type: array
-          items:
-            $ref: '#/components/schemas/MerchantPartnerResponse'
-        totalCount:
-          type: integer
-    Address:
-      type: object
-      properties:
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-          example: US
-        zip:
-          type: string
-    InviteEmailResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        email:
-          type: string
-          format: email
-        sentAt:
-          type: string
-          format: date-time
-    MerchantPartnerResponse:
-      type: object
-      properties:
-        merchantId:
-          type: string
-          description: Unique identifier assigned to the new merchant
-        status:
-          type: string
-          description: Initial onboarding status
-        businessName:
-          type: string
-        email:
-          type: string
-          format: email
-        createdAt:
-          type: string
-          format: date-time
   responses:
-    NotFound:
-      description: Not Found - resource does not exist
+    UnprocessableEntity:
+      description: Unprocessable Entity - validation error
       content:
         application/json:
           schema:
@@ -386,20 +386,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable Entity - validation error
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found - resource does not exist
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Forbidden - no right to access this resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal Server Error
       content:
         application/json:
           schema:

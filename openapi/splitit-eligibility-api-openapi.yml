@@ -51,38 +51,16 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    NotFound:
-      description: Not Found - resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - token is not authorized or is expired
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal Server Error - unexpected server condition
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Forbidden - merchant has no right to access this resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable Entity - validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    CheckEligibilityRequest:
+      type: object
+      required:
+      - planData
+      properties:
+        planData:
+          $ref: '#/components/schemas/PlanData'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
     ErrorResponse:
       type: object
       properties:
@@ -95,6 +73,39 @@ components:
         additionalInfo:
           type: string
           description: Additional context about the error
+    BillingAddress:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+          description: Street address line 1
+        addressLine2:
+          type: string
+          description: Street address line 2
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State or province code
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: US
+        zip:
+          type: string
+          description: Postal/ZIP code
+    Money:
+      type: object
+      properties:
+        value:
+          type: number
+          format: float
+          description: Monetary amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
     PlanData:
       type: object
       properties:
@@ -118,48 +129,6 @@ components:
           type: string
           format: date
           description: Date of the first installment charge
-    CheckEligibilityRequest:
-      type: object
-      required:
-      - planData
-      properties:
-        planData:
-          $ref: '#/components/schemas/PlanData'
-        billingAddress:
-          $ref: '#/components/schemas/BillingAddress'
-    Money:
-      type: object
-      properties:
-        value:
-          type: number
-          format: float
-          description: Monetary amount
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          example: USD
-    BillingAddress:
-      type: object
-      properties:
-        addressLine1:
-          type: string
-          description: Street address line 1
-        addressLine2:
-          type: string
-          description: Street address line 2
-        city:
-          type: string
-          description: City
-        state:
-          type: string
-          description: State or province code
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-          example: US
-        zip:
-          type: string
-          description: Postal/ZIP code
     CheckEligibilityResponse:
       type: object
       properties:
@@ -178,6 +147,37 @@ components:
         errors:
           type: array
           items:
+            $ref: '#/components/schemas/ErrorResponse'
+  responses:
+    UnprocessableEntity:
+      description: Unprocessable Entity - validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - token is not authorized or is expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal Server Error - unexpected server condition
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found - resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden - merchant has no right to access this resource
+      content:
+        application/json:
+          schema:
             $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
