@@ -220,18 +220,38 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - token is not authorized or is expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden - no right to access this resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found - resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable Entity - validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    InviteEmailResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        email:
-          type: string
-          format: email
-        sentAt:
-          type: string
-          format: date-time
     PendingAccountsResponse:
       type: object
       properties:
@@ -241,13 +261,6 @@ components:
             $ref: '#/components/schemas/MerchantPartnerResponse'
         totalCount:
           type: integer
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
     MerchantStructureResponse:
       type: object
       properties:
@@ -264,17 +277,19 @@ components:
                 type: boolean
               description:
                 type: string
-    LoginLinkResponse:
+    DocumentUploadResponse:
       type: object
       properties:
-        loginUrl:
+        documentId:
           type: string
-          format: uri
-          description: Time-limited secure login URL for the merchant portal
-        expiresAt:
+          description: Unique identifier for the uploaded document
+        documentType:
+          type: string
+        uploadedAt:
           type: string
           format: date-time
-          description: Expiration time of the login link
+        status:
+          type: string
     OnboardingStatusResponse:
       type: object
       properties:
@@ -312,36 +327,35 @@ components:
           example: US
         zip:
           type: string
-    MerchantPartnerResponse:
+    InviteEmailResponse:
       type: object
       properties:
-        merchantId:
-          type: string
-          description: Unique identifier assigned to the new merchant
-        status:
-          type: string
-          description: Initial onboarding status
-        businessName:
-          type: string
+        success:
+          type: boolean
         email:
           type: string
           format: email
-        createdAt:
+        sentAt:
           type: string
           format: date-time
-    DocumentUploadResponse:
+    ErrorResponse:
       type: object
       properties:
-        documentId:
+        errorCode:
           type: string
-          description: Unique identifier for the uploaded document
-        documentType:
+        message:
           type: string
-        uploadedAt:
+    LoginLinkResponse:
+      type: object
+      properties:
+        loginUrl:
+          type: string
+          format: uri
+          description: Time-limited secure login URL for the merchant portal
+        expiresAt:
           type: string
           format: date-time
-        status:
-          type: string
+          description: Expiration time of the login link
     AddMerchantPartnerRequest:
       type: object
       required:
@@ -373,37 +387,23 @@ components:
         contactName:
           type: string
           description: Name of the primary contact person
-  responses:
-    UnprocessableEntity:
-      description: Unprocessable Entity - validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - token is not authorized or is expired
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not Found - resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Forbidden - no right to access this resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    MerchantPartnerResponse:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          description: Unique identifier assigned to the new merchant
+        status:
+          type: string
+          description: Initial onboarding status
+        businessName:
+          type: string
+        email:
+          type: string
+          format: email
+        createdAt:
+          type: string
+          format: date-time
   securitySchemes:
     bearerAuth:
       type: http

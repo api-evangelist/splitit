@@ -269,42 +269,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    InitiateInstallmentPlanRequest:
-      type: object
-      required:
-      - planData
-      properties:
-        planData:
-          $ref: '#/components/schemas/PlanData'
-        billingAddress:
-          $ref: '#/components/schemas/BillingAddress'
-        consumerData:
-          $ref: '#/components/schemas/ConsumerData'
-        redirectUrls:
-          $ref: '#/components/schemas/RedirectUrls'
-        ux:
-          $ref: '#/components/schemas/UXSettings'
-    InstallmentPlanResponse:
-      type: object
-      properties:
-        installmentPlanNumber:
-          type: string
-          description: Unique identifier for the installment plan
-        status:
-          type: string
-          description: Current plan status (e.g., Active, Cancelled, Cleared)
-        planData:
-          $ref: '#/components/schemas/PlanData'
-        consumerData:
-          $ref: '#/components/schemas/ConsumerData'
-        installments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Installment'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
     UXSettings:
       type: object
       properties:
@@ -312,131 +276,29 @@ components:
           type: string
           format: uri
           description: Return URL after checkout completion
-    RefundResponse:
+    PlanData:
       type: object
       properties:
-        refundId:
-          type: string
-          description: Unique identifier for the refund
-        installmentPlanNumber:
-          type: string
-          description: The plan that was refunded
-        refundedAmount:
+        totalAmount:
           $ref: '#/components/schemas/Money'
-        status:
-          type: string
-          description: Status of the refund
-    Money:
-      type: object
-      properties:
-        value:
-          type: number
-          format: float
-          description: Monetary amount
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          example: USD
-    RefundRequest:
-      type: object
-      required:
-      - amount
-      properties:
-        amount:
-          $ref: '#/components/schemas/Money'
-        refundStrategy:
-          type: string
-          enum:
-          - FutureInstallmentsFirst
-          - FutureInstallmentsLast
-          - FutureInstallmentsLast_PaidFirstInstallmentsFirst
-          description: Strategy for applying partial refunds against installments
-    InitiateInstallmentPlanResponse:
-      type: object
-      properties:
-        installmentPlanNumber:
-          type: string
-          description: Unique identifier for the installment plan
-        checkoutUrl:
-          type: string
-          format: uri
-          description: URL to redirect the shopper to complete checkout
-        status:
-          type: string
-          description: Current status of the plan
-    CreditCardDetails:
-      type: object
-      properties:
-        cardNumber:
-          type: string
-          description: Full credit card number (PAN)
-        cardExpYear:
+        numberOfInstallments:
           type: integer
-          description: Card expiration year (4 digits)
-        cardExpMonth:
-          type: integer
-          description: Card expiration month (1-12)
-        cardCvv:
-          type: string
-          description: Card security code (CVV/CVC)
-        cardHolderFullName:
-          type: string
-          description: Name as it appears on the card
-    SearchInstallmentPlanRequest:
-      type: object
-      properties:
+          description: Number of monthly installments
+          example: 3
         refOrderNumber:
           type: string
-          description: Merchant reference order number
+          description: Merchant's reference order number
         extendedParams:
           type: object
           additionalProperties:
             type: string
-          description: Key-value pairs to match against
-    SearchInstallmentPlanResponse:
-      type: object
-      properties:
-        installmentPlans:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstallmentPlanResponse'
-        totalCount:
-          type: integer
-    ConsumerData:
-      type: object
-      properties:
-        fullName:
+          description: Additional merchant-defined key-value parameters
+        firstInstallmentAmount:
+          $ref: '#/components/schemas/Money'
+        firstChargeDate:
           type: string
-          description: Shopper's full name
-        email:
-          type: string
-          format: email
-          description: Shopper's email address
-        phoneNumber:
-          type: string
-          description: Shopper's phone number
-        civilId:
-          type: string
-          description: National identification number if applicable
-        billingAddress:
-          $ref: '#/components/schemas/BillingAddress'
-    UpdateByAlternateFieldRequest:
-      type: object
-      required:
-      - identifier
-      properties:
-        identifier:
-          type: object
-          properties:
-            refOrderNumber:
-              type: string
-              description: Merchant reference order number to identify the plan
-            extendedParams:
-              type: object
-              additionalProperties:
-                type: string
-        updateData:
-          $ref: '#/components/schemas/UpdateInstallmentPlanRequest'
+          format: date
+          description: Date of the first installment charge
     VerifyAuthorizationResponse:
       type: object
       properties:
@@ -465,21 +327,82 @@ components:
         captureServiceTrackingInfo:
           type: string
           description: Tracking information for shipped orders
-    RedirectUrls:
+    CreditCardDetails:
       type: object
       properties:
-        succeeded:
+        cardNumber:
           type: string
-          format: uri
-          description: URL to redirect to on successful payment
-        failed:
+          description: Full credit card number (PAN)
+        cardExpYear:
+          type: integer
+          description: Card expiration year (4 digits)
+        cardExpMonth:
+          type: integer
+          description: Card expiration month (1-12)
+        cardCvv:
           type: string
-          format: uri
-          description: URL to redirect to on payment failure
-        cancelled:
+          description: Card security code (CVV/CVC)
+        cardHolderFullName:
           type: string
-          format: uri
-          description: URL to redirect to if the shopper cancels
+          description: Name as it appears on the card
+    RefundResponse:
+      type: object
+      properties:
+        refundId:
+          type: string
+          description: Unique identifier for the refund
+        installmentPlanNumber:
+          type: string
+          description: The plan that was refunded
+        refundedAmount:
+          $ref: '#/components/schemas/Money'
+        status:
+          type: string
+          description: Status of the refund
+    CreateInstallmentPlanRequest:
+      type: object
+      required:
+      - planData
+      - creditCardDetails
+      - consumerData
+      properties:
+        planData:
+          $ref: '#/components/schemas/PlanData'
+        creditCardDetails:
+          $ref: '#/components/schemas/CreditCardDetails'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
+        consumerData:
+          $ref: '#/components/schemas/ConsumerData'
+        redirectUrls:
+          $ref: '#/components/schemas/RedirectUrls'
+    ConsumerData:
+      type: object
+      properties:
+        fullName:
+          type: string
+          description: Shopper's full name
+        email:
+          type: string
+          format: email
+          description: Shopper's email address
+        phoneNumber:
+          type: string
+          description: Shopper's phone number
+        civilId:
+          type: string
+          description: National identification number if applicable
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
+    SearchInstallmentPlanResponse:
+      type: object
+      properties:
+        installmentPlans:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallmentPlanResponse'
+        totalCount:
+          type: integer
     ErrorResponse:
       type: object
       properties:
@@ -492,6 +415,19 @@ components:
         additionalInfo:
           type: string
           description: Additional context about the error
+    InitiateInstallmentPlanResponse:
+      type: object
+      properties:
+        installmentPlanNumber:
+          type: string
+          description: Unique identifier for the installment plan
+        checkoutUrl:
+          type: string
+          format: uri
+          description: URL to redirect the shopper to complete checkout
+        status:
+          type: string
+          description: Current status of the plan
     BillingAddress:
       type: object
       properties:
@@ -514,46 +450,20 @@ components:
         zip:
           type: string
           description: Postal/ZIP code
-    CreateInstallmentPlanRequest:
+    RefundRequest:
       type: object
       required:
-      - planData
-      - creditCardDetails
-      - consumerData
+      - amount
       properties:
-        planData:
-          $ref: '#/components/schemas/PlanData'
-        creditCardDetails:
-          $ref: '#/components/schemas/CreditCardDetails'
-        billingAddress:
-          $ref: '#/components/schemas/BillingAddress'
-        consumerData:
-          $ref: '#/components/schemas/ConsumerData'
-        redirectUrls:
-          $ref: '#/components/schemas/RedirectUrls'
-    PlanData:
-      type: object
-      properties:
-        totalAmount:
+        amount:
           $ref: '#/components/schemas/Money'
-        numberOfInstallments:
-          type: integer
-          description: Number of monthly installments
-          example: 3
-        refOrderNumber:
+        refundStrategy:
           type: string
-          description: Merchant's reference order number
-        extendedParams:
-          type: object
-          additionalProperties:
-            type: string
-          description: Additional merchant-defined key-value parameters
-        firstInstallmentAmount:
-          $ref: '#/components/schemas/Money'
-        firstChargeDate:
-          type: string
-          format: date
-          description: Date of the first installment charge
+          enum:
+          - FutureInstallmentsFirst
+          - FutureInstallmentsLast
+          - FutureInstallmentsLast_PaidFirstInstallmentsFirst
+          description: Strategy for applying partial refunds against installments
     Installment:
       type: object
       properties:
@@ -569,6 +479,96 @@ components:
         status:
           type: string
           description: Status of this installment
+    InitiateInstallmentPlanRequest:
+      type: object
+      required:
+      - planData
+      properties:
+        planData:
+          $ref: '#/components/schemas/PlanData'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
+        consumerData:
+          $ref: '#/components/schemas/ConsumerData'
+        redirectUrls:
+          $ref: '#/components/schemas/RedirectUrls'
+        ux:
+          $ref: '#/components/schemas/UXSettings'
+    Money:
+      type: object
+      properties:
+        value:
+          type: number
+          format: float
+          description: Monetary amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
+    RedirectUrls:
+      type: object
+      properties:
+        succeeded:
+          type: string
+          format: uri
+          description: URL to redirect to on successful payment
+        failed:
+          type: string
+          format: uri
+          description: URL to redirect to on payment failure
+        cancelled:
+          type: string
+          format: uri
+          description: URL to redirect to if the shopper cancels
+    InstallmentPlanResponse:
+      type: object
+      properties:
+        installmentPlanNumber:
+          type: string
+          description: Unique identifier for the installment plan
+        status:
+          type: string
+          description: Current plan status (e.g., Active, Cancelled, Cleared)
+        planData:
+          $ref: '#/components/schemas/PlanData'
+        consumerData:
+          $ref: '#/components/schemas/ConsumerData'
+        installments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Installment'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    SearchInstallmentPlanRequest:
+      type: object
+      properties:
+        refOrderNumber:
+          type: string
+          description: Merchant reference order number
+        extendedParams:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs to match against
+    UpdateByAlternateFieldRequest:
+      type: object
+      required:
+      - identifier
+      properties:
+        identifier:
+          type: object
+          properties:
+            refOrderNumber:
+              type: string
+              description: Merchant reference order number to identify the plan
+            extendedParams:
+              type: object
+              additionalProperties:
+                type: string
+        updateData:
+          $ref: '#/components/schemas/UpdateInstallmentPlanRequest'
   responses:
     Forbidden:
       description: Forbidden - merchant has no right to access this resource
@@ -582,6 +582,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found - resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Unauthorized - token is not authorized or is expired
       content:
@@ -590,12 +596,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     InternalServerError:
       description: Internal Server Error - unexpected server condition
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not Found - resource does not exist
       content:
         application/json:
           schema:
