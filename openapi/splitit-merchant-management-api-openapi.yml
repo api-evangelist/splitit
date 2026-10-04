@@ -220,76 +220,18 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - token is not authorized or is expired
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Forbidden - no right to access this resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not Found - resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable Entity - validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    PendingAccountsResponse:
+    InviteEmailResponse:
       type: object
       properties:
-        merchants:
-          type: array
-          items:
-            $ref: '#/components/schemas/MerchantPartnerResponse'
-        totalCount:
-          type: integer
-    MerchantStructureResponse:
-      type: object
-      properties:
-        requiredFields:
-          type: array
-          items:
-            type: object
-            properties:
-              fieldName:
-                type: string
-              fieldType:
-                type: string
-              isRequired:
-                type: boolean
-              description:
-                type: string
-    DocumentUploadResponse:
-      type: object
-      properties:
-        documentId:
+        success:
+          type: boolean
+        email:
           type: string
-          description: Unique identifier for the uploaded document
-        documentType:
-          type: string
-        uploadedAt:
+          format: email
+        sentAt:
           type: string
           format: date-time
-        status:
-          type: string
     OnboardingStatusResponse:
       type: object
       properties:
@@ -311,6 +253,22 @@ components:
         updatedAt:
           type: string
           format: date-time
+    MerchantStructureResponse:
+      type: object
+      properties:
+        requiredFields:
+          type: array
+          items:
+            type: object
+            properties:
+              fieldName:
+                type: string
+              fieldType:
+                type: string
+              isRequired:
+                type: boolean
+              description:
+                type: string
     Address:
       type: object
       properties:
@@ -327,24 +285,15 @@ components:
           example: US
         zip:
           type: string
-    InviteEmailResponse:
+    PendingAccountsResponse:
       type: object
       properties:
-        success:
-          type: boolean
-        email:
-          type: string
-          format: email
-        sentAt:
-          type: string
-          format: date-time
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
+        merchants:
+          type: array
+          items:
+            $ref: '#/components/schemas/MerchantPartnerResponse'
+        totalCount:
+          type: integer
     LoginLinkResponse:
       type: object
       properties:
@@ -387,6 +336,19 @@ components:
         contactName:
           type: string
           description: Name of the primary contact person
+    DocumentUploadResponse:
+      type: object
+      properties:
+        documentId:
+          type: string
+          description: Unique identifier for the uploaded document
+        documentType:
+          type: string
+        uploadedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
     MerchantPartnerResponse:
       type: object
       properties:
@@ -404,6 +366,44 @@ components:
         createdAt:
           type: string
           format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+  responses:
+    Forbidden:
+      description: Forbidden - no right to access this resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - token is not authorized or is expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found - resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable Entity - validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http

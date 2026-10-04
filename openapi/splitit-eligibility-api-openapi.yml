@@ -52,26 +52,8 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
-    InternalServerError:
-      description: Internal Server Error - unexpected server condition
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Forbidden - merchant has no right to access this resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable Entity - validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not Found - resource does not exist
       content:
         application/json:
           schema:
@@ -82,16 +64,25 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal Server Error - unexpected server condition
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found - resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable Entity - validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    CheckEligibilityRequest:
-      type: object
-      required:
-      - planData
-      properties:
-        planData:
-          $ref: '#/components/schemas/PlanData'
-        billingAddress:
-          $ref: '#/components/schemas/BillingAddress'
     PlanData:
       type: object
       properties:
@@ -138,25 +129,6 @@ components:
           type: string
           description: ISO 4217 currency code
           example: USD
-    CheckEligibilityResponse:
-      type: object
-      properties:
-        isEligible:
-          type: boolean
-          description: Whether the shopper is eligible for installment plans
-        eligiblePlans:
-          type: array
-          items:
-            type: object
-            properties:
-              numberOfInstallments:
-                type: integer
-              installmentAmount:
-                $ref: '#/components/schemas/Money'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
     BillingAddress:
       type: object
       properties:
@@ -179,6 +151,34 @@ components:
         zip:
           type: string
           description: Postal/ZIP code
+    CheckEligibilityResponse:
+      type: object
+      properties:
+        isEligible:
+          type: boolean
+          description: Whether the shopper is eligible for installment plans
+        eligiblePlans:
+          type: array
+          items:
+            type: object
+            properties:
+              numberOfInstallments:
+                type: integer
+              installmentAmount:
+                $ref: '#/components/schemas/Money'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    CheckEligibilityRequest:
+      type: object
+      required:
+      - planData
+      properties:
+        planData:
+          $ref: '#/components/schemas/PlanData'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
   securitySchemes:
     bearerAuth:
       type: http
