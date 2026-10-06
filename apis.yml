@@ -39,7 +39,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/splitit.pn
 url: https://raw.githubusercontent.com/api-evangelist/splitit/refs/heads/main/apis.yml
 version: '0.19'
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-10-06'
 tags:
   - Payments
   - Installments
@@ -241,6 +241,10 @@ apis:
   - type: Authentication
     url: https://developers.splitit.com/api/v3/authenticate/
 common:
+  - url: https://www.splitit.com/blog/
+    type: Blog
+  - url: https://www.splitit.com/feed/
+    type: BlogRSS
   - type: Website
     url: https://www.splitit.com/
   - type: PostmanWorkspace
