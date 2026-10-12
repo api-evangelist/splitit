@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/splitit/integrations
+- https://n8n.io/integrations/splitit/
+- https://composio.dev/toolkits/splitit
+- https://monid.ai/tools/splitit
+checked:
+- https://composio.dev/toolkits/splitit
+- https://monid.ai/tools/splitit
+- https://n8n.io/integrations/splitit/
+- https://zapier.com/apps/splitit/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
