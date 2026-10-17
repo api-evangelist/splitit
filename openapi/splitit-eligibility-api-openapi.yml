@@ -52,6 +52,24 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
+    UnprocessableEntity:
+      description: Unprocessable Entity - validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found - resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal Server Error - unexpected server condition
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Forbidden - merchant has no right to access this resource
       content:
@@ -64,48 +82,35 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal Server Error - unexpected server condition
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not Found - resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable Entity - validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    PlanData:
+    CheckEligibilityResponse:
       type: object
       properties:
-        totalAmount:
-          $ref: '#/components/schemas/Money'
-        numberOfInstallments:
-          type: integer
-          description: Number of monthly installments
-          example: 3
-        refOrderNumber:
-          type: string
-          description: Merchant's reference order number
-        extendedParams:
-          type: object
-          additionalProperties:
-            type: string
-          description: Additional merchant-defined key-value parameters
-        firstInstallmentAmount:
-          $ref: '#/components/schemas/Money'
-        firstChargeDate:
-          type: string
-          format: date
-          description: Date of the first installment charge
+        isEligible:
+          type: boolean
+          description: Whether the shopper is eligible for installment plans
+        eligiblePlans:
+          type: array
+          items:
+            type: object
+            properties:
+              numberOfInstallments:
+                type: integer
+              installmentAmount:
+                $ref: '#/components/schemas/Money'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    CheckEligibilityRequest:
+      type: object
+      required:
+      - planData
+      properties:
+        planData:
+          $ref: '#/components/schemas/PlanData'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
     ErrorResponse:
       type: object
       properties:
@@ -151,34 +156,29 @@ components:
         zip:
           type: string
           description: Postal/ZIP code
-    CheckEligibilityResponse:
+    PlanData:
       type: object
       properties:
-        isEligible:
-          type: boolean
-          description: Whether the shopper is eligible for installment plans
-        eligiblePlans:
-          type: array
-          items:
-            type: object
-            properties:
-              numberOfInstallments:
-                type: integer
-              installmentAmount:
-                $ref: '#/components/schemas/Money'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    CheckEligibilityRequest:
-      type: object
-      required:
-      - planData
-      properties:
-        planData:
-          $ref: '#/components/schemas/PlanData'
-        billingAddress:
-          $ref: '#/components/schemas/BillingAddress'
+        totalAmount:
+          $ref: '#/components/schemas/Money'
+        numberOfInstallments:
+          type: integer
+          description: Number of monthly installments
+          example: 3
+        refOrderNumber:
+          type: string
+          description: Merchant's reference order number
+        extendedParams:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional merchant-defined key-value parameters
+        firstInstallmentAmount:
+          $ref: '#/components/schemas/Money'
+        firstChargeDate:
+          type: string
+          format: date
+          description: Date of the first installment charge
   securitySchemes:
     bearerAuth:
       type: http

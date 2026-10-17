@@ -220,80 +220,38 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    UnprocessableEntity:
+      description: Unprocessable Entity - validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found - resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden - no right to access this resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - token is not authorized or is expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    InviteEmailResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        email:
-          type: string
-          format: email
-        sentAt:
-          type: string
-          format: date-time
-    OnboardingStatusResponse:
-      type: object
-      properties:
-        merchantId:
-          type: string
-        status:
-          type: string
-          enum:
-          - Pending
-          - UnderReview
-          - Approved
-          - Rejected
-          - RequiresInfo
-        pendingItems:
-          type: array
-          items:
-            type: string
-          description: List of items required to complete onboarding
-        updatedAt:
-          type: string
-          format: date-time
-    MerchantStructureResponse:
-      type: object
-      properties:
-        requiredFields:
-          type: array
-          items:
-            type: object
-            properties:
-              fieldName:
-                type: string
-              fieldType:
-                type: string
-              isRequired:
-                type: boolean
-              description:
-                type: string
-    Address:
-      type: object
-      properties:
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-          example: US
-        zip:
-          type: string
-    PendingAccountsResponse:
-      type: object
-      properties:
-        merchants:
-          type: array
-          items:
-            $ref: '#/components/schemas/MerchantPartnerResponse'
-        totalCount:
-          type: integer
     LoginLinkResponse:
       type: object
       properties:
@@ -349,6 +307,27 @@ components:
           format: date-time
         status:
           type: string
+    OnboardingStatusResponse:
+      type: object
+      properties:
+        merchantId:
+          type: string
+        status:
+          type: string
+          enum:
+          - Pending
+          - UnderReview
+          - Approved
+          - Rejected
+          - RequiresInfo
+        pendingItems:
+          type: array
+          items:
+            type: string
+          description: List of items required to complete onboarding
+        updatedAt:
+          type: string
+          format: date-time
     MerchantPartnerResponse:
       type: object
       properties:
@@ -366,6 +345,31 @@ components:
         createdAt:
           type: string
           format: date-time
+    PendingAccountsResponse:
+      type: object
+      properties:
+        merchants:
+          type: array
+          items:
+            $ref: '#/components/schemas/MerchantPartnerResponse'
+        totalCount:
+          type: integer
+    Address:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+          example: US
+        zip:
+          type: string
     ErrorResponse:
       type: object
       properties:
@@ -373,37 +377,33 @@ components:
           type: string
         message:
           type: string
-  responses:
-    Forbidden:
-      description: Forbidden - no right to access this resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - token is not authorized or is expired
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not Found - resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable Entity - validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    MerchantStructureResponse:
+      type: object
+      properties:
+        requiredFields:
+          type: array
+          items:
+            type: object
+            properties:
+              fieldName:
+                type: string
+              fieldType:
+                type: string
+              isRequired:
+                type: boolean
+              description:
+                type: string
+    InviteEmailResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        email:
+          type: string
+          format: email
+        sentAt:
+          type: string
+          format: date-time
   securitySchemes:
     bearerAuth:
       type: http
