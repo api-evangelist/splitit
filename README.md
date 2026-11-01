@@ -64,70 +64,175 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Splitit is a credit card installment platform that enables merchants to offer shoppers the ability to split existing credit card purchases into monthly installments without requiring new credit applications, additional interest charges, or third-party redirects. The platform operates directly on shoppers' existing credit cards, leveraging available credit to create installment plans while merchants receive full payment upfront.
+Splitit is a credit card installment platform that enables merchants to offer shoppers the ability to split existing credit card purchases into monthly installments without requiring new credit applications, additional interest charges, or third-party redirects. The platform operates directly on shoppers' existing credit cards, leveraging available credit to create installment plans while merchants receive full payment upfront. Splitit provides REST APIs for installment plan creation, eligibility checking, refunds, chargebacks, and merchant onboarding, along with plugins for major e-commerce platforms.
 
-**Developer Portal:** https://developers.splitit.com/
+**Areas:** Payments · Installments · Buy Now Pay Later · Credit Cards · Fintech · E-Commerce
 
-## APIs
+## Splitit on APIs.io
 
-| API | Description |
-|-----|-------------|
-| Installments API v3 | Create and manage credit card installment plans |
-| Installments API v4 | Updated installment plan management |
-| Account Management System API | Onboard and manage sub-merchants |
-| Merchant Reports API | Retrieve transaction and funding reports |
-| Key Exchange Server API | Manage encryption keys for secure integrations |
-| Chargebacks API | Handle and respond to chargeback disputes |
-| Text-to-Pay API | Initiate installment plans via SMS, email, and QR codes |
+Everything profiled for Splitit is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/splitit/](https://apis.io/providers/splitit/)** — or go straight to one of the APIs or properties below.
 
-## Authentication
+### APIs (10)
 
-All API requests require Bearer token authentication. Obtain tokens via the identity server:
+- [Splitit Installments API v4](https://apis.io/apis/splitit/splitit-installments-api-v4/) — The updated version of the Splitit Installments API offering enhanced capabilities for creating and managing credit card installment plans with improvements…
+- [Splitit Account Management System API](https://apis.io/apis/splitit/splitit-account-management-system-api/) — API for onboarding and managing sub-merchants on the Splitit platform. Enables payment facilitators and marketplace operators to add merchant partners,…
+- [Splitit Merchant Reports API](https://apis.io/apis/splitit/splitit-merchant-reports-api/) — API for retrieving merchant-level reporting data including transaction history, installment plan summaries, funding reports, and reconciliation data for…
+- [Splitit Key Exchange Server API](https://apis.io/apis/splitit/splitit-key-exchange-server-api/) — API for creating and managing encryption keys used to secure payment data during Splitit integrations. Supports cryptographic key management for secure card…
+- [Splitit Chargebacks API](https://apis.io/apis/splitit/splitit-chargebacks-api/) — API for handling and managing chargebacks on Splitit installment plans. Enables merchants to respond to, track, and resolve chargeback disputes for…
+- [Splitit Text-to-Pay API](https://apis.io/apis/splitit/splitit-text-to-pay-api/) — API enabling merchants to initiate Splitit installment payment flows via SMS, email, and QR codes as part of the Splitit Go product. Allows sending payment…
+- [Splitit Authentication API](https://apis.io/apis/splitit/splitit-authentication-api/) — Obtain access tokens
+- [Splitit Eligibility API](https://apis.io/apis/splitit/splitit-eligibility-api/) — Check shopper eligibility for installment plans
+- [Splitit Installment Plans API](https://apis.io/apis/splitit/splitit-installment-plans-api/) — Create, initiate, fetch, update, refund, and cancel installment plans
+- [Splitit Merchant Management API](https://apis.io/apis/splitit/splitit-merchant-management-api/) — Onboard and manage merchant partners
 
-- **Sandbox:** `https://id.sandbox.splitit.com/connect/token`
-- **Production:** `https://id.production.splitit.com/connect/token`
+### Published properties
 
-Token request uses OAuth 2.0 `client_credentials` grant with `client_id` and `client_secret` from your Merchant Hub.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Base URLs
+#### MCP servers (1)
 
-- **Sandbox:** `https://web-api-v3.sandbox.splitit.com`
-- **Production:** `https://webapi.production.splitit.com`
+Model Context Protocol servers that expose the API to agents.
 
-## SDKs
+- [splitit](https://apis.io/servers/splitit/splitit/)
 
-Official SDKs available at https://github.com/splitit:
+#### Agentic access (1)
 
-- Python: https://github.com/Splitit/Python-SDK
-- TypeScript: https://github.com/Splitit/TypeScript-SDK
-- Go: https://github.com/Splitit/Go-SDK
-- Java: https://github.com/Splitit/Java-SDK
-- .NET/C#: https://github.com/Splitit/.NET-C-SDK
-- PHP: https://github.com/Splitit/PHP-SDK
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Merchant Plans
+- [Splitit Agentic Access](https://apis.io/agentic-access/splitit/splitit-agentic-access/)
 
-Splitit offers four merchant pricing tiers. See [plans/plans.yml](plans/plans.yml) for details.
+#### JSON Schema (1)
 
-| Plan | Consumer APR | Upfront Funding |
-|------|-------------|-----------------|
-| Essential | 0%–35.99% | Full |
-| Flex | 0%–35.99% (variable) | Full |
-| Premium | 0% | Full |
-| Premium Lite | 0% | Partial |
+The data models the API reads and writes.
 
-All plans support up to $10,000 per order and up to 12 installments. Contact Splitit sales for merchant fee rates.
+- [Splitit Installment Plan](https://apis.io/schemas/splitit/installment-plan/)
 
-## Resources
+#### JSON-LD (1)
 
-- [APIs Overview](https://developers.splitit.com/apis/)
-- [Quickstart Guide](https://developers.splitit.com/direct-api/quickstart/)
-- [Sandbox Registration](https://register-developer.sandbox.splitit.com/)
-- [Pricing Plans](https://www.splitit.com/business/pricing-plans/)
-- [Trust Center](https://trust.splitit.com)
-- [Merchant Portal](https://merchant.splitit.com)
-- [Contact Sales](https://www.splitit.com/contact-sales/)
+Linked-data contexts for the provider's vocabulary.
 
-## Profile
+- [Splitit Context](https://apis.io/jsonld/splitit/splitit-context/)
 
-This repository contains an [APIs.json 0.19](apis.yml) profile for Splitit maintained by [API Evangelist](https://apievangelist.com).
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Splitit API Vocabulary](https://apis.io/vocabularies/splitit/splitit-vocabulary/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Check Eligibility](https://apis.io/examples/splitit/check-eligibility/)
+- [Create Installment Plan](https://apis.io/examples/splitit/create-installment-plan/)
+- [Initiate Installment Plan](https://apis.io/examples/splitit/initiate-installment-plan/)
+- [Refund Plan](https://apis.io/examples/splitit/refund-plan/)
+
+#### Collections (8)
+
+Postman and Open Collection request collections.
+
+- [Splitit Account Management System Authentication API](https://apis.io/collections/splitit/open-splitit-authentication-api/)
+- [Splitit Account Management System Authentication Eligibility API](https://apis.io/collections/splitit/open-splitit-eligibility-api/)
+- [Splitit Account Management System Authentication Installment Plans API](https://apis.io/collections/splitit/open-splitit-installment-plans-api/)
+- [Splitit Account Management System Authentication Merchant Management API](https://apis.io/collections/splitit/open-splitit-merchant-management-api/)
+- [Splitit Account Management System Authentication API](https://apis.io/collections/splitit/postman-splitit-authentication-api/)
+- [Splitit Account Management System Authentication Eligibility API](https://apis.io/collections/splitit/postman-splitit-eligibility-api/)
+- [Splitit Account Management System Authentication Installment Plans API](https://apis.io/collections/splitit/postman-splitit-installment-plans-api/)
+- [Splitit Account Management System Authentication Merchant Management API](https://apis.io/collections/splitit/postman-splitit-merchant-management-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Splitit — jsonschema rules](https://apis.io/rules/splitit/splitit-jsonschema-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Splitit Authentication](https://apis.io/security/splitit/splitit-authentication/)
+- [Splitit Domain Security](https://apis.io/security/splitit/splitit-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/splitit/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/splitit/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/splitit/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.splitit.com/)
+- [Documentation](https://developers.splitit.com/apis/)
+- [Getting started](https://developers.splitit.com/direct-api/quickstart/)
+- [Pricing](https://www.splitit.com/business/pricing-plans/)
+- [Blog](https://www.splitit.com/blog/)
+
+## API Evangelist rating
+
+**Kin Score 44.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 59.0 |
+| Contract governance | 9.8 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 63.1 |
+| Access clarity | 39.5 |
+
+**Agent readiness 37.9** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | unknown |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 19.6** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/splitit/](https://apis.io/providers/splitit/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Splitit: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/splitit/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
